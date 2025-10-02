@@ -49,6 +49,7 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
         movie.releaseYear <= filters.yearRange[1]
     );
 
+    // Sort
     switch (filters.sortBy) {
       case "newest":
         result.sort(

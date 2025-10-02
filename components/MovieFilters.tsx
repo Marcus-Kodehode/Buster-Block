@@ -31,7 +31,7 @@ export default function MovieFilters({
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     genre: "",
-    sortBy: "newest",
+    sortBy: "year-desc",
     yearRange: [1888, currentYear + 5],
   });
 
@@ -45,7 +45,7 @@ export default function MovieFilters({
     const defaultFilters: FilterState = {
       search: "",
       genre: "",
-      sortBy: "newest",
+      sortBy: "year-desc",
       yearRange: [1888, currentYear + 5],
     };
     setFilters(defaultFilters);
@@ -55,7 +55,7 @@ export default function MovieFilters({
   const hasActiveFilters =
     filters.search ||
     filters.genre ||
-    filters.sortBy !== "newest" ||
+    filters.sortBy !== "year-desc" ||
     filters.yearRange[0] !== 1888 ||
     filters.yearRange[1] !== currentYear + 5;
 
@@ -150,11 +150,11 @@ export default function MovieFilters({
                 paddingRight: "2.5rem",
               }}
             >
-              <option value="newest" className="bg-[#0a0a0a] text-gray-300">
-                Nyeste først
+              <option value="year-desc" className="bg-[#0a0a0a] text-gray-300">
+                Utgivelsesår (nyest)
               </option>
-              <option value="oldest" className="bg-[#0a0a0a] text-gray-300">
-                Eldste først
+              <option value="year-asc" className="bg-[#0a0a0a] text-gray-300">
+                Utgivelsesår (eldst)
               </option>
               <option value="title-asc" className="bg-[#0a0a0a] text-gray-300">
                 Tittel (A-Å)
@@ -162,11 +162,11 @@ export default function MovieFilters({
               <option value="title-desc" className="bg-[#0a0a0a] text-gray-300">
                 Tittel (Å-A)
               </option>
-              <option value="year-desc" className="bg-[#0a0a0a] text-gray-300">
-                Utgivelsesår (nyest)
+              <option value="newest" className="bg-[#0a0a0a] text-gray-300">
+                Sist lagt til
               </option>
-              <option value="year-asc" className="bg-[#0a0a0a] text-gray-300">
-                Utgivelsesår (eldst)
+              <option value="oldest" className="bg-[#0a0a0a] text-gray-300">
+                Først lagt til
               </option>
             </select>
           </div>
