@@ -1,3 +1,8 @@
+/*
+ * File: app/api/movies/[id]/reviews/[reviewId]/route.ts
+ * Location: API route handler for individual review operations
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
@@ -56,3 +61,14 @@ export async function DELETE(
     );
   }
 }
+
+/*
+ * This API route handles individual review operations:
+ * - DELETE: Remove a specific review
+ * Features:
+ * - Authentication verification
+ * - Owner-only access control
+ * - Review existence validation
+ * - Clean error handling
+ * - Proper status codes (200, 401, 403, 404, 500)
+ */

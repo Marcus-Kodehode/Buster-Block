@@ -1,3 +1,8 @@
+/*
+ * File: app/(auth)/sign-up/[[...sign-up]]/page.tsx
+ * Location: Authentication page for user registration
+ */
+
 import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
@@ -7,3 +12,11 @@ export default function SignUpPage() {
     </div>
   );
 }
+
+/*
+ * This page component provides:
+ * - Clerk registration integration
+ * - Centered sign-up form layout
+ * - Responsive height calculation
+ * - Catch-all route handling
+ */

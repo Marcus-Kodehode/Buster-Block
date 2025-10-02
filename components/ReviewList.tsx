@@ -1,3 +1,8 @@
+/*
+ * File: components/ReviewList.tsx
+ * Location: Component for displaying a list of movie reviews
+ */
+
 import { Review } from "@/types";
 import { Star, User, Calendar } from "lucide-react";
 import DeleteButton from "./DeleteButton";
@@ -90,3 +95,14 @@ export default function ReviewList({
     </div>
   );
 }
+
+/*
+ * This component renders a list of movie reviews with user interactions.
+ * Features:
+ * - Displays review ratings, text, and metadata
+ * - Shows author and timestamp for each review
+ * - Empty state handling with placeholder
+ * - Owner-specific actions (delete functionality)
+ * - Star rating visualization
+ * - Responsive layout for review cards
+ */

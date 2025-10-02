@@ -1,3 +1,8 @@
+/*
+ * File: lib/models/Movie.ts
+ * Location: Database model definition for Movie entity
+ */
+
 import { Schema, model, models, Document } from "mongoose";
 
 export interface IMovie extends Document {
@@ -68,3 +73,13 @@ MovieSchema.index({ releaseYear: -1 });
 const Movie = models.Movie || model<IMovie>("Movie", MovieSchema);
 
 export default Movie;
+
+/*
+ * This file defines the Mongoose schema and model for movies in the database.
+ * Features:
+ * - Required fields: title, director, releaseYear, genre, createdBy
+ * - Optional fields: description, runtime
+ * - Automatic timestamp fields: createdAt, updatedAt
+ * - Input validation and field constraints
+ * - Database indexes for optimized queries on title, genre, and releaseYear
+ */

@@ -1,3 +1,8 @@
+/*
+ * File: lib/mongodb.ts
+ * Location: Database connection utility for MongoDB
+ */
+
 import mongoose from "mongoose";
 
 if (!process.env.MONGODB_URI) {
@@ -57,3 +62,13 @@ async function connectDB(): Promise<typeof mongoose> {
 }
 
 export default connectDB;
+
+/*
+ * This utility provides MongoDB connection handling with:
+ * - Connection caching to prevent multiple connections
+ * - Environment variable validation
+ * - Connection error handling and logging
+ * - TypeScript type safety
+ * - Global connection state management
+ * - Development-friendly logging
+ */

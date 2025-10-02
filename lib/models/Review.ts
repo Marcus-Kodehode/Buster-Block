@@ -1,3 +1,8 @@
+/*
+ * File: lib/models/Review.ts
+ * Location: Database model definition for Review entity
+ */
+
 import mongoose, { Schema, model, models, Document } from "mongoose";
 
 export interface IReview extends Document {
@@ -53,3 +58,13 @@ ReviewSchema.index({ movieId: 1, userId: 1 }, { unique: true });
 const Review = models.Review || model<IReview>("Review", ReviewSchema);
 
 export default Review;
+
+/*
+ * This file defines the Mongoose schema and model for movie reviews in the database.
+ * Features:
+ * - Required fields: movieId, userId, reviewAuthor, reviewText, rating
+ * - Rating validation (1-5 scale)
+ * - Automatic timestamp fields: createdAt, updatedAt
+ * - Database indexes for optimized queries
+ * - Unique constraint on movieId+userId combination to prevent duplicate reviews
+ */

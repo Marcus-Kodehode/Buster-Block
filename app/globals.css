@@ -1,3 +1,8 @@
+/*
+ * File: app/globals.css
+ * Location: Global CSS styles and variables for the entire application
+ */
+
 /* ===== Base / Tailwind ===== */
 @import "tailwindcss";
 
@@ -642,3 +647,14 @@ body::before {
 .movie-card .runtime-badge {
   backdrop-filter: blur(8px);
 }
+
+/*
+ * This file contains all global styles and CSS variables for the application.
+ * Features:
+ * - Design token definitions (colors, spacing, shadows)
+ * - Genre-specific color themes and variations
+ * - Card and badge styling with hover effects
+ * - Typography improvements for readability
+ * - Responsive design adjustments
+ * - Animation and transition definitions
+ */

@@ -1,3 +1,8 @@
+/*
+ * File: app/movies/[id]/edit/page.tsx
+ * Location: Server-side page component for editing existing movies
+ */
+
 import { auth } from "@clerk/nextjs/server";
 import { redirect, notFound } from "next/navigation";
 import connectDB from "@/lib/mongodb";
@@ -66,3 +71,13 @@ export default async function EditMoviePage({
     </div>
   );
 }
+
+/*
+ * This server component handles:
+ * - Authentication and authorization checks
+ * - Fetching movie data for editing
+ * - Owner verification (only owners can edit)
+ * - Data transformation for the edit form
+ * - Error handling and not found states
+ * - Integration with EditMovieForm component 
+ */

@@ -1,3 +1,8 @@
+/*
+ * File: app/HomeClient.tsx
+ * Location: Client-side component for the home page with movie listing and filtering
+ */
+
 "use client";
 
 import { useState, useMemo } from "react";
@@ -162,3 +167,14 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
     </div>
   );
 }
+
+/*
+ * This client component handles:
+ * - Movie filtering and sorting functionality
+ * - Display of movie grid with responsive layout
+ * - Genre extraction and filtering options
+ * - Empty state handling
+ * - Movie count display
+ * - Integration with MovieCard and MovieFilters components
+ * - Add movie button for authenticated users
+ */

@@ -1,3 +1,8 @@
+/*
+ * File: lib/validations/reviewSchema.ts
+ * Location: Zod validation schemas for review data
+ */
+
 import { z } from "zod";
 
 export const createReviewSchema = z.object({
@@ -14,3 +19,11 @@ export const createReviewSchema = z.object({
 });
 
 export type CreateReviewInput = z.infer<typeof createReviewSchema>;
+
+/*
+ * This file defines Zod validation schemas for reviews with:
+ * - Text length constraints for review content
+ * - Numeric range validation for ratings (1-5)
+ * - Input type definitions for review creation
+ * - User-friendly error messages
+ */

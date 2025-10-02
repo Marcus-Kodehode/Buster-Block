@@ -1,3 +1,8 @@
+/*
+ * File: lib/validations/movieSchema.ts
+ * Location: Zod validation schemas for movie data
+ */
+
 import { z } from "zod";
 
 export const createMovieSchema = z.object({
@@ -41,3 +46,13 @@ export const updateMovieSchema = createMovieSchema.partial();
 
 export type CreateMovieInput = z.infer<typeof createMovieSchema>;
 export type UpdateMovieInput = z.infer<typeof updateMovieSchema>;
+
+/*
+ * This file defines Zod validation schemas for movies with:
+ * - Required fields with length constraints
+ * - Optional fields with appropriate validations
+ * - Date range validation for release year
+ * - Numeric constraints for runtime
+ * - Input type definitions for create/update operations
+ * - Comprehensive error messages
+ */

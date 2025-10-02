@@ -1,3 +1,8 @@
+/*
+ * File: components/MovieForm.tsx
+ * Location: Client-side form component for creating new movies
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -235,3 +240,15 @@ export default function MovieForm() {
     </form>
   );
 }
+
+/*
+ * This component provides a form for creating new movie entries.
+ * Features:
+ * - Input validation and error handling
+ * - Loading states during submission
+ * - Character count for description field
+ * - Client-side validation before submission
+ * - Responsive form layout with animated feedback
+ * - User feedback for form submission status
+ * - Navigation handling (back button)
+ */

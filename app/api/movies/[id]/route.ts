@@ -1,3 +1,8 @@
+/*
+ * File: app/api/movies/[id]/route.ts
+ * Location: API route handler for individual movie operations
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
@@ -158,3 +163,17 @@ export async function DELETE(
     );
   }
 }
+
+/*
+ * This API route handles individual movie operations:
+ * - GET: Retrieve a specific movie by ID
+ * - PUT: Update movie details with validation
+ * - DELETE: Remove a movie and its associated reviews
+ * Features:
+ * - Owner-only access for modifications
+ * - Input validation for updates
+ * - Cascade deletion of reviews
+ * - Not found handling
+ * - Proper error responses and status codes
+ * - Authentication and authorization checks
+ */

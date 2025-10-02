@@ -1,3 +1,8 @@
+/*
+ * File: components/DeleteButton.tsx
+ * Location: Reusable client-side component for deleting movies and reviews
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -119,3 +124,14 @@ export default function DeleteButton({
     </div>
   );
 }
+
+/*
+ * This component provides a delete functionality with confirmation dialog.
+ * Features:
+ * - Supports deleting both movies and reviews
+ * - Shows loading state during deletion
+ * - Displays confirmation dialog before deletion
+ * - Error handling with user feedback
+ * - Success callback for parent component updates
+ * - Responsive and accessible UI elements
+ */

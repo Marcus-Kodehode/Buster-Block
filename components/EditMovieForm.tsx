@@ -1,3 +1,8 @@
+/*
+ * File: components/EditMovieForm.tsx
+ * Location: Client-side form component for editing existing movies
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -240,3 +245,15 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
     </form>
   );
 }
+
+/*
+ * This component provides a form for editing existing movie entries.
+ * Features:
+ * - Pre-filled form with existing movie data
+ * - Real-time validation and error handling
+ * - Loading states during submission
+ * - Character count for description
+ * - Client-side validation before submission
+ * - Responsive form layout with animated feedback
+ * - Navigation handling (back button)
+ */

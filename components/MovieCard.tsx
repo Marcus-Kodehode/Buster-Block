@@ -1,3 +1,8 @@
+/*
+ * File: components/MovieCard.tsx
+ * Location: Reusable component for displaying movie information in a card format
+ */
+
 import Link from "next/link";
 import { Movie } from "@/types";
 import { Film, Clock } from "lucide-react";
@@ -77,3 +82,13 @@ export default function MovieCard({ movie }: MovieCardProps) {
     </Link>
   );
 }
+
+/*
+ * This component renders a movie card with a consistent layout, including:
+ * - Movie title and year
+ * - Description with line clamping
+ * - Genre badge
+ * - Runtime information
+ * - Interactive hover effects and animations
+ * - Links to individual movie pages
+ */

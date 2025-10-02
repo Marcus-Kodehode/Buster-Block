@@ -1,3 +1,8 @@
+/*
+ * File: components/ReviewForm.tsx
+ * Location: Client-side form component for submitting movie reviews
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -167,3 +172,15 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
     </form>
   );
 }
+
+/*
+ * This component provides a form for submitting movie reviews.
+ * Features:
+ * - Star rating system with hover effects
+ * - Review text input with validation
+ * - Expandable form interface
+ * - Loading states during submission
+ * - Error handling and user feedback
+ * - Real-time form validation
+ * - Responsive and interactive UI elements
+ */

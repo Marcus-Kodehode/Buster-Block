@@ -1,3 +1,8 @@
+/*
+ * File: app/movies/[id]/page.tsx
+ * Location: Server-side page component for displaying individual movie details
+ */
+
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
@@ -176,3 +181,15 @@ export default async function MoviePage({
     </div>
   );
 }
+
+/*
+ * This server component handles:
+ * - Fetching detailed movie information by ID
+ * - Loading associated reviews
+ * - Authentication state verification
+ * - Owner-specific actions (edit/delete)
+ * - Review submission interface
+ * - Data transformation and formatting
+ * - Not found state handling
+ * - Error handling for database operations
+ */

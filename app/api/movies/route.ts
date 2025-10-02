@@ -1,3 +1,8 @@
+/*
+ * File: app/api/movies/route.ts
+ * Location: API route handler for movie collection endpoints
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
@@ -83,3 +88,15 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+/*
+ * This API route handles:
+ * - GET: Retrieve all movies, sorted by creation date
+ * - POST: Create new movie entries with validation
+ * Features:
+ * - Authentication checks for POST requests
+ * - Input validation using Zod schemas
+ * - MongoDB connection management
+ * - Standardized error responses
+ * - Proper status codes (200, 201, 400, 401, 500)
+ */

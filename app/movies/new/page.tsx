@@ -1,3 +1,8 @@
+/*
+ * File: app/movies/new/page.tsx
+ * Location: Server-side page component for creating new movies
+ */
+
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import MovieForm from "@/components/MovieForm";
@@ -31,3 +36,12 @@ export default async function NewMoviePage() {
     </div>
   );
 }
+
+/*
+ * This server component handles:
+ * - Authentication check for creating new movies
+ * - Integration with MovieForm component
+ * - Redirect for unauthenticated users
+ * - Visual layout with gradient effects
+ * - User feedback and guidance
+ */

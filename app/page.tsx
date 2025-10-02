@@ -1,3 +1,8 @@
+/*
+ * File: app/page.tsx
+ * Location: Main page component (server-side) for the Buster Block application
+ */
+
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
@@ -33,3 +38,13 @@ export default async function Home() {
 
   return <HomeClient movies={movies} userId={userId} />;
 }
+
+/*
+ * This server component handles:
+ * - Authentication state retrieval
+ * - Database connection
+ * - Fetching all movies from the database
+ * - Data transformation for client consumption
+ * - Error handling for database operations
+ * - Rendering the client-side home component
+ */

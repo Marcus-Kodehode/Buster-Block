@@ -1,3 +1,8 @@
+/*
+ * File: app/(auth)/sign-in/[[...sign-in]]/page.tsx
+ * Location: Authentication page for user sign-in
+ */
+
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
@@ -7,3 +12,11 @@ export default function SignInPage() {
     </div>
   );
 }
+
+/*
+ * This page component provides:
+ * - Clerk authentication integration
+ * - Centered sign-in form layout
+ * - Responsive height calculation
+ * - Catch-all route handling
+ */

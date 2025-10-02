@@ -1,3 +1,8 @@
+/*
+ * File: components/MovieFilters.tsx
+ * Location: Client-side component for movie filtering functionality
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -208,3 +213,13 @@ export default function MovieFilters({
     </div>
   );
 }
+
+/*
+ * This component provides a comprehensive filtering interface for movies.
+ * It includes functionality for:
+ * - Text search for titles, directors, and genres
+ * - Genre filtering from available genres
+ * - Sorting options (by year, title, date added)
+ * - Year range selection with dual sliders
+ * - Filter state management and reset capabilities
+ */

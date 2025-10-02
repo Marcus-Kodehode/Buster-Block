@@ -1,3 +1,8 @@
+/*
+ * File: app/layout.tsx
+ * Location: Root layout component providing the application shell
+ */
+
 import type { Metadata } from "next";
 import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
@@ -67,3 +72,14 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
+
+/*
+ * This root layout component provides:
+ * - Authentication provider setup
+ * - Global font configuration (Inter)
+ * - Metadata for SEO
+ * - Responsive navigation header
+ * - Authentication state UI (login/register/user button)
+ * - Consistent page layout structure
+ * - Global styles integration
+ */

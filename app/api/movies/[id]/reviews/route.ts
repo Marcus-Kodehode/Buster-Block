@@ -1,3 +1,8 @@
+/*
+ * File: app/api/movies/[id]/reviews/route.ts
+ * Location: API route handler for movie review collection endpoints
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
@@ -158,3 +163,16 @@ export async function POST(
     );
   }
 }
+
+/*
+ * This API route handles movie review operations:
+ * - GET: Retrieve all reviews for a specific movie
+ * - POST: Create a new review with user details
+ * Features:
+ * - Authentication for review creation
+ * - Input validation using Zod schemas
+ * - Duplicate review prevention
+ * - User profile integration
+ * - Movie existence verification
+ * - Error handling with appropriate status codes
+ */
