@@ -1,12 +1,12 @@
 Høy prioritet (bør implementeres nå):
-1. Søk og filtrering:
+1. Søk og filtrering:✅
 
 Søkefelt øverst for tittel/regissør/sjanger
 Filter-dropdown for sjanger
 Sortering (nyeste, eldste, beste rating, alfabetisk)
 Filter på utgivelsesår (range slider)
 
-2. i18n (internasjonalisering):
+2. i18n (internasjonalisering):✅
 
 next-intl er standard for Next.js 15
 Språkvelger i header
