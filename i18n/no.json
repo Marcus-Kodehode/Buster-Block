@@ -1,0 +1,36 @@
+{
+  "common": {
+    "appName": "Buster Block",
+    "tagline": "Utforsk og del dine meninger om filmer"
+  },
+  "nav": { "signIn": "Logg inn", "signUp": "Registrer deg" },
+  "home": {
+    "title": "Filmanmeldelser",
+    "addMovie": "Legg til film",
+    "noMovies": "Ingen filmer lagt til ennå",
+    "beFirst": "Bli den første til å legge til en film",
+    "showing": "Viser {count} av {total} filmer",
+    "noMatches": "Ingen filmer matcher dine filtre"
+  },
+  "filters": {
+    "searchPlaceholder": "Søk etter tittel, regissør eller sjanger...",
+    "filtersButton": "Filtre og sortering",
+    "reset": "Nullstill",
+    "genre": "Sjanger",
+    "allGenres": "Alle sjangere",
+    "sortBy": "Sorter etter",
+    "yearNewest": "Utgivelsesår (nyest)",
+    "yearOldest": "Utgivelsesår (eldst)",
+    "titleAsc": "Tittel (A–Å)",
+    "titleDesc": "Tittel (Å–A)",
+    "addedLast": "Sist lagt til",
+    "addedFirst": "Først lagt til",
+    "yearRange": "Utgivelsesår: {min} - {max}"
+  },
+  "movie": {
+    "directedBy": "Regissert av",
+    "minutes": "min",
+    "edit": "Rediger film",
+    "delete": "Slett"
+  }
+}

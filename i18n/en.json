@@ -1,0 +1,36 @@
+{
+  "common": {
+    "appName": "Buster Block",
+    "tagline": "Explore and share your opinions about movies"
+  },
+  "nav": { "signIn": "Sign In", "signUp": "Sign Up" },
+  "home": {
+    "title": "Movie Reviews",
+    "addMovie": "Add Movie",
+    "noMovies": "No movies added yet",
+    "beFirst": "Be the first to add a movie",
+    "showing": "Showing {count} of {total} movies",
+    "noMatches": "No movies match your filters"
+  },
+  "filters": {
+    "searchPlaceholder": "Search for title, director or genre...",
+    "filtersButton": "Filters and sorting",
+    "reset": "Reset",
+    "genre": "Genre",
+    "allGenres": "All genres",
+    "sortBy": "Sort by",
+    "yearNewest": "Release year (newest)",
+    "yearOldest": "Release year (oldest)",
+    "titleAsc": "Title (A-Z)",
+    "titleDesc": "Title (Z-A)",
+    "addedLast": "Last added",
+    "addedFirst": "First added",
+    "yearRange": "Release year: {min} - {max}"
+  },
+  "movie": {
+    "directedBy": "Directed by",
+    "minutes": "min",
+    "edit": "Edit movie",
+    "delete": "Delete"
+  }
+}
