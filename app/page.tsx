@@ -31,11 +31,13 @@ export default async function Home() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Filmanmeldelser</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+            Filmanmeldelser
+          </h1>
+          <p className="text-gray-400 text-lg">
             Utforsk og del dine meninger om filmer
           </p>
         </div>
@@ -43,7 +45,7 @@ export default async function Home() {
         {userId && (
           <Link
             href="/movies/new"
-            className="bg-[#6c47ff] text-white rounded-lg px-6 py-3 font-medium hover:bg-[#5639cc] transition"
+            className="relative group bg-[#6c47ff] text-white rounded-xl px-8 py-4 font-semibold hover:bg-[#5639cc] transition-all duration-300 shadow-lg shadow-[#6c47ff]/25 hover:shadow-[#6c47ff]/40 hover:-translate-y-0.5"
           >
             Legg til film
           </Link>
@@ -51,16 +53,16 @@ export default async function Home() {
       </div>
 
       {movies.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-500 text-lg mb-4">
+        <div className="text-center py-20 border border-gray-800 rounded-2xl bg-gradient-to-b from-gray-900/50 to-gray-900/20">
+          <p className="text-gray-400 text-lg mb-6">
             Ingen filmer lagt til ennå
           </p>
           {userId && (
             <Link
               href="/movies/new"
-              className="text-[#6c47ff] hover:underline font-medium"
+              className="inline-block text-[#6c47ff] hover:text-[#5639cc] font-semibold text-lg hover:underline transition-colors"
             >
-              Bli den første til å legge til en film
+              Bli den første til å legge til en film →
             </Link>
           )}
         </div>
