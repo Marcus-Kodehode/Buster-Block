@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 import MovieCard from "@/components/MovieCard";
 import connectDB from "@/lib/mongodb";
@@ -49,9 +50,9 @@ export default async function Home() {
         {userId && (
           <Link
             href="/movies/new"
-            className="relative group bg-gradient-to-r from-[#6c47ff] to-[#06b6d4] text-white rounded-xl px-8 py-4 font-semibold hover:shadow-2xl hover:shadow-[#6c47ff]/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+            className="relative group bg-gradient-to-r from-[#1e40af] to-[#1e3a8a] text-white rounded-xl px-8 py-4 font-semibold hover:shadow-2xl hover:shadow-[#1e40af]/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#06b6d4] to-[#ec4899] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative flex items-center gap-2">
               <Film className="w-5 h-5" />
               Legg til film
@@ -61,17 +62,24 @@ export default async function Home() {
       </div>
 
       {movies.length === 0 ? (
-        <div className="relative text-center py-20 border border-gray-800 rounded-2xl bg-gradient-to-br from-gray-900/50 via-[#6c47ff]/5 to-gray-900/50 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#6c47ff]/5 via-transparent to-[#06b6d4]/5 animate-pulse" />
+        <div className="relative text-center py-20 border border-gray-800 rounded-2xl bg-gradient-to-br from-gray-900/50 via-[#1e40af]/5 to-gray-900/50 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1e40af]/5 via-transparent to-[#fbbf24]/5 animate-pulse" />
           <div className="relative">
-            <Film className="w-16 h-16 text-[#6c47ff] mx-auto mb-4 opacity-50" />
+            <div className="relative w-24 h-24 mx-auto mb-6">
+              <Image
+                src="/logo.png"
+                alt="Buster Block"
+                fill
+                className="object-contain opacity-50"
+              />
+            </div>
             <p className="text-gray-400 text-lg mb-6">
               Ingen filmer lagt til ennå
             </p>
             {userId && (
               <Link
                 href="/movies/new"
-                className="inline-block bg-gradient-to-r from-[#6c47ff] to-[#06b6d4] bg-clip-text text-transparent font-semibold text-lg hover:from-[#06b6d4] hover:to-[#ec4899] transition-all"
+                className="inline-block bg-gradient-to-r from-[#1e40af] to-[#fbbf24] bg-clip-text text-transparent font-semibold text-lg hover:from-[#fbbf24] hover:to-[#1e40af] transition-all"
               >
                 Bli den første til å legge til en film →
               </Link>
