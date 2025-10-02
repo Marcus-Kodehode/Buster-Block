@@ -49,34 +49,6 @@ Buster Block is a full-stack movie review platform built with Next.js, allowing 
 - Optimize performance
 - Add production build scripts
 
-## Future Enhancements (Backlog)
-
-### User Experience
-- [ ] Add search functionality
-- [ ] Implement filtering and sorting options
-- [ ] Add pagination for movie listings
-- [ ] Create user watchlists
-- [ ] Add movie recommendations
-
-### Social Features
-- [ ] Add user following system
-- [ ] Implement review comments
-- [ ] Add review likes/reactions
-- [ ] Create user activity feed
-
-### Content Management
-- [ ] Add movie categories/tags
-- [ ] Implement movie image uploads
-- [ ] Add movie trailers integration
-- [ ] Create curated movie lists
-
-### Technical Improvements
-- [ ] Add unit tests
-- [ ] Implement E2E testing
-- [ ] Add API rate limiting
-- [ ] Implement caching
-- [ ] Add analytics tracking
-
 ## Technology Stack
 
 ### Frontend
@@ -97,6 +69,11 @@ Buster Block is a full-stack movie review platform built with Next.js, allowing 
 ### Deployment
 - Vercel
 - MongoDB Atlas
+- Github
+
+### Development Tools
+- Postman - API testing and documentation
+- ESLint - Code quality and style enforcement
 
 ## Development Guidelines
 
