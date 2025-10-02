@@ -1,9 +1,9 @@
 <div align="center">
   <p>
-    <img src="/public/images/MBlogo.png.png" alt="Personal Logo" width="150" />
+    <img src="/public/images/MBlogo.png" alt="Personal Logo" width="150" />
   </p>
   <p>
-    <img src="/public/images/buster-block-logo.png" alt="Buster Block Logo" width="150" />
+    <img src="/public/images/logo.png" alt="Buster Block Logo" width="150" />
   </p>
   
   # Buster Block
