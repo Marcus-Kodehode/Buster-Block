@@ -5,6 +5,8 @@ import Movie from "@/lib/models/Movie";
 import { createMovieSchema } from "@/lib/validations/movieSchema";
 import { z } from "zod";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 // GET /api/movies - Hent alle filmer
 export async function GET() {
   try {

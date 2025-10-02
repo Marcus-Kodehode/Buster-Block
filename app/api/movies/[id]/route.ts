@@ -6,6 +6,9 @@ import Review from "@/lib/models/Review";
 import { updateMovieSchema } from "@/lib/validations/movieSchema";
 import { ZodError } from "zod";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

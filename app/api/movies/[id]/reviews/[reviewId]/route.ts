@@ -3,6 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
 import Review from "@/lib/models/Review";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string; reviewId: string }> }

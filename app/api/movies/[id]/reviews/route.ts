@@ -7,6 +7,9 @@ import { createReviewSchema } from "@/lib/validations/reviewSchema";
 import { z } from "zod";
 import mongoose from "mongoose";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 // GET /api/movies/:id/reviews - Hent alle reviews for en film
 export async function GET(
   req: NextRequest,
