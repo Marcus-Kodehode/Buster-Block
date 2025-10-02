@@ -118,6 +118,99 @@ buster-block/
 │       └── reviewSchema.ts  # Review validation
 ```
 
+## API Documentation
+
+### Movies Endpoints
+
+#### `GET /api/movies`
+Fetch all movies.
+- **Response**: 200 OK
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "title": "string",
+      "director": "string",
+      "releaseYear": "number",
+      "genre": "string",
+      "reviews": "array"
+    }
+  ]
+}
+```
+
+#### `POST /api/movies`
+Create a new movie (requires authentication).
+- **Request Body**:
+```json
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "releaseYear": 2010,
+  "genre": "Sci-Fi"
+}
+```
+- **Response**: 201 Created | 401 Unauthorized
+
+#### `GET /api/movies/:id`
+Fetch a single movie by ID.
+- **Response**: 200 OK | 404 Not Found
+
+#### `PUT /api/movies/:id`
+Update a movie (requires authentication + ownership).
+- **Response**: 200 OK | 403 Forbidden
+
+### Reviews Endpoints
+
+#### `GET /api/movies/:id/reviews`
+Fetch all reviews for a movie.
+- **Response**: 200 OK
+
+#### `POST /api/movies/:id/reviews`
+Create a review (requires authentication).
+- **Request Body**:
+```json
+{
+  "reviewText": "Amazing movie with great visuals!",
+  "rating": 5
+}
+```
+- **Response**: 201 Created | 409 Conflict
+
+## Testing with Postman
+
+A Postman collection is included for testing all API endpoints: `Buster-Block-API.postman_collection.json`
+
+To import and use:
+1. Open Postman
+2. Click "Import"
+3. Select the `Buster-Block-API.postman_collection.json` file
+4. Test all endpoints with the provided examples
+
+## Deployment
+
+The application is deployed on Vercel with automatic CI/CD from GitHub.
+
+### Environment Variables Required:
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+MONGODB_URI=your_mongodb_connection_string
+```
+
+## Building for Production
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm start
+```
+
+The optimized build will be available in the `.next/` directory.
+
 ## Browser Support
 
 - Chrome/Chromium 88+
@@ -125,106 +218,15 @@ buster-block/
 - Safari 14+
 - Edge 88+
 
-## Building for Production
+## Contributing
 
-```bash
-npm run build
-```
-
-The optimized build will be available in the `.next/` directory.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-<div align="center">
-  <i>"Not all those who wander are lost, but in this game, the highest card wins!"</i>
-  <br>
-  <sub>Built with ❤️ by Marcus-Kodehode</sub>
-</div>
-│   └── ReviewList.tsx      # Display reviews
-├── lib/
-│   ├── models/
-│   │   ├── Movie.ts        # Movie schema
-│   │   └── Review.ts       # Review schema
-│   ├── validations/
-│   │   ├── movieSchema.ts  # Movie validation
-│   │   └── reviewSchema.ts # Review validation
-│   └── mongodb.ts          # Database connection
-├── types/
-│   └── index.ts            # TypeScript types
-└── middleware.ts           # Clerk middleware
-API Documentation
-Movies Endpoints
-GET /api/movies
-Fetch all movies.
-Response: 200 OK
-json{
-  "success": true,
-  "data": [...]
-}
-POST /api/movies
-Create a new movie (requires authentication).
-Request Body:
-json{
-  "title": "Inception",
-  "director": "Christopher Nolan",
-  "releaseYear": 2010,
-  "genre": "Sci-Fi"
-}
-Response: 201 Created | 401 Unauthorized
-GET /api/movies/:id
-Fetch a single movie by ID.
-Response: 200 OK | 404 Not Found
-PUT /api/movies/:id
-Update a movie (requires authentication + ownership).
-Response: 200 OK | 403 Forbidden
-Reviews Endpoints
-GET /api/movies/:id/reviews
-Fetch all reviews for a movie.
-Response: 200 OK
-POST /api/movies/:id/reviews
-Create a review (requires authentication).
-Request Body:
-json{
-  "reviewText": "Amazing movie with great visuals!",
-  "rating": 5
-}
-Response: 201 Created | 409 Conflict
-Testing with Postman
-A Postman collection is included: Buster-Block-API.postman_collection.json
-To import:
-
-Open Postman
-Click "Import"
-Select the JSON file
-Test all endpoints
-
-Deployment
-Deployed on Vercel with automatic CI/CD from GitHub.
-Environment Variables:
-
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-CLERK_SECRET_KEY
-MONGODB_URI
-
-Building for Production
-bashnpm run build
-npm start
-The optimized build will be available in the .next/ directory.
-Browser Support
-
-Chrome/Chromium 88+
-Firefox 85+
-Safari 14+
-Edge 88+
-
-Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 <div align="center">
   <i>"All we have to decide is what to do with the films that are given to us."</i>
