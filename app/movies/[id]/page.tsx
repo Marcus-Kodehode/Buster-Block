@@ -3,11 +3,20 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import ReviewList from "@/components/ReviewList";
 import ReviewForm from "@/components/ReviewForm";
+import DeleteButton from "@/components/DeleteButton";
 import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
 import Review from "@/lib/models/Review";
 import type { Movie as MovieType, Review as ReviewType } from "@/types";
-import { Clock, Calendar, User, Tag, ArrowLeft, Sparkles } from "lucide-react";
+import {
+  Clock,
+  Calendar,
+  User,
+  Tag,
+  ArrowLeft,
+  Sparkles,
+  Edit,
+} from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -62,6 +71,8 @@ export default async function MoviePage({
     notFound();
   }
 
+  const isOwner = userId === movie.createdBy;
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <Link
@@ -73,10 +84,7 @@ export default async function MoviePage({
       </Link>
 
       <div className="relative border border-gray-800 rounded-2xl p-8 bg-gradient-to-br from-gray-900/80 via-gray-900/50 to-gray-900/30 overflow-hidden">
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#6c47ff]/5 via-transparent to-[#06b6d4]/5" />
-
-        {/* Accent line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#6c47ff] via-[#06b6d4] to-[#ec4899]" />
 
         <div className="relative">
@@ -121,6 +129,19 @@ export default async function MoviePage({
               </p>
             </div>
           )}
+
+          {isOwner && (
+            <div className="mt-6 pt-6 border-t border-gray-800/50 flex gap-3">
+              <Link
+                href={`/movies/${id}/edit`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#6c47ff]/20 border border-[#6c47ff]/50 text-[#6c47ff] rounded-lg hover:bg-[#6c47ff]/30 transition-all"
+              >
+                <Edit className="w-4 h-4" />
+                Rediger film
+              </Link>
+              <DeleteButton itemId={id} itemType="movie" />
+            </div>
+          )}
         </div>
       </div>
 
@@ -146,7 +167,11 @@ export default async function MoviePage({
           </div>
         )}
 
-        <ReviewList reviews={reviews} currentUserId={userId || undefined} />
+        <ReviewList
+          reviews={reviews}
+          currentUserId={userId || undefined}
+          movieId={id}
+        />
       </div>
     </div>
   );

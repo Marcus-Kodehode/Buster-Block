@@ -2,38 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
+import Review from "@/lib/models/Review";
 import { updateMovieSchema } from "@/lib/validations/movieSchema";
-import { z } from "zod";
-import mongoose from "mongoose";
+import { ZodError } from "zod";
 
-// GET /api/movies/:id - Hent én film
 export async function GET(
-  req: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
+
   try {
-    const { id } = await params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid movie ID format",
-        },
-        { status: 400 }
-      );
-    }
-
     await connectDB();
-
-    const movie = await Movie.findById(id).lean();
+    const movie = await Movie.findById(id);
 
     if (!movie) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Movie not found",
-        },
+        { success: false, error: "Movie not found" },
         { status: 404 }
       );
     }
@@ -45,98 +30,127 @@ export async function GET(
   } catch (error) {
     console.error("Error fetching movie:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: "Failed to fetch movie",
-      },
+      { success: false, error: "Failed to fetch movie" },
       { status: 500 }
     );
   }
 }
 
-// PUT /api/movies/:id - Oppdater en film (krever innlogging + eierskap)
 export async function PUT(
-  req: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const { userId } = await auth();
+  const { id } = await params;
+
+  if (!userId) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
   try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Unauthorized - You must be logged in to update a movie",
-        },
-        { status: 401 }
-      );
-    }
-
-    const { id } = await params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid movie ID format",
-        },
-        { status: 400 }
-      );
-    }
+    const body = await request.json();
+    const validatedData = updateMovieSchema.parse(body);
 
     await connectDB();
+    const movie = await Movie.findById(id);
 
-    const existingMovie = await Movie.findById(id);
-
-    if (!existingMovie) {
+    if (!movie) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Movie not found",
-        },
+        { success: false, error: "Movie not found" },
         { status: 404 }
       );
     }
 
-    if (existingMovie.createdBy !== userId) {
+    // Sjekk eierskap
+    if (movie.createdBy !== userId) {
       return NextResponse.json(
         {
           success: false,
-          error: "Forbidden - You can only edit movies you created",
+          error: "Forbidden: You can only edit your own movies",
         },
         { status: 403 }
       );
     }
 
-    const body = await req.json();
-    const validatedData = updateMovieSchema.parse(body);
-
-    const updatedMovie = await Movie.findByIdAndUpdate(id, validatedData, {
-      new: true,
-      runValidators: true,
-    }).lean();
+    const updatedMovie = await Movie.findByIdAndUpdate(
+      id,
+      { $set: validatedData },
+      { new: true, runValidators: true }
+    );
 
     return NextResponse.json({
       success: true,
       data: updatedMovie,
     });
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof ZodError) {
       return NextResponse.json(
-        {
-          success: false,
-          error: error.issues[0].message,
-        },
+        { success: false, error: error.issues[0].message },
         { status: 400 }
       );
     }
 
     console.error("Error updating movie:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: "Failed to update movie",
-      },
+      { success: false, error: "Failed to update movie" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { userId } = await auth();
+  const { id } = await params;
+
+  if (!userId) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    await connectDB();
+    const movie = await Movie.findById(id);
+
+    if (!movie) {
+      return NextResponse.json(
+        { success: false, error: "Movie not found" },
+        { status: 404 }
+      );
+    }
+
+    // Sjekk eierskap
+    if (movie.createdBy !== userId) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Forbidden: You can only delete your own movies",
+        },
+        { status: 403 }
+      );
+    }
+
+    // Slett alle reviews for denne filmen først
+    await Review.deleteMany({ movieId: id });
+
+    // Slett filmen
+    await Movie.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      success: true,
+      message: "Movie and associated reviews deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting movie:", error);
+    return NextResponse.json(
+      { success: false, error: "Failed to delete movie" },
       { status: 500 }
     );
   }

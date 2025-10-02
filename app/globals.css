@@ -604,3 +604,41 @@ body::before {
 
   --card-shadow-hover: 0 20px 60px rgba(234, 179, 8, 0.3);
 }
+/* Forbedringer for bedre lesbarhet */
+.movie-card .title {
+  /* Prevent orphan words on line breaks */
+  text-wrap: balance;
+  /* Better line height for 2-line titles */
+  line-height: 1.2;
+}
+
+.movie-card .director {
+  /* Subtle color shift on hover */
+  transition: color 200ms ease;
+}
+
+.movie-card:hover .director {
+  color: currentColor;
+}
+
+.movie-card .year {
+  /* Subtle glow effect matching genre */
+  text-shadow: 0 0 12px var(--icon-color);
+  opacity: 0.8;
+}
+
+.movie-card:hover .year {
+  opacity: 1;
+}
+
+/* Ensure description doesn't overflow */
+.movie-card .desc {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Badge improvements */
+.movie-card .badge,
+.movie-card .runtime-badge {
+  backdrop-filter: blur(8px);
+}
