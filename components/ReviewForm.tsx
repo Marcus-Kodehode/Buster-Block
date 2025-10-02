@@ -8,12 +8,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Star, MessageSquare, AlertCircle, Loader2, X } from "lucide-react";
+import { useT } from "@/components/I18nProvider";
 
 interface ReviewFormProps {
   movieId: string;
 }
 
 export default function ReviewForm({ movieId }: ReviewFormProps) {
+  const t = useT();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,14 +42,14 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Failed to post review");
+        throw new Error(data.error || t("reviews.errorGeneric"));
       }
 
       setFormData({ reviewText: "", rating: 5 });
       setShowForm(false);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : t("reviews.errorGeneric"));
     } finally {
       setLoading(false);
     }
@@ -61,7 +63,7 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
       >
         <span className="flex items-center justify-center gap-2">
           <MessageSquare className="w-5 h-5" />
-          Skriv en anmeldelse
+          {t("reviews.writeReview")}
         </span>
       </button>
     );
@@ -82,7 +84,7 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
       <div className="space-y-3">
         <label className="flex items-center gap-2 text-sm font-semibold text-gray-300">
           <Star className="w-4 h-4 text-[#6c47ff]" />
-          Din vurdering *
+          {t("reviews.yourRating")} *
         </label>
         <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -105,11 +107,11 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
           ))}
         </div>
         <p className="text-sm text-gray-500">
-          {formData.rating === 5 && "Fantastisk!"}
-          {formData.rating === 4 && "Veldig bra"}
-          {formData.rating === 3 && "Grei"}
-          {formData.rating === 2 && "Svak"}
-          {formData.rating === 1 && "Dårlig"}
+          {formData.rating === 5 && t("reviews.ratingLabel5")}
+          {formData.rating === 4 && t("reviews.ratingLabel4")}
+          {formData.rating === 3 && t("reviews.ratingLabel3")}
+          {formData.rating === 2 && t("reviews.ratingLabel2")}
+          {formData.rating === 1 && t("reviews.ratingLabel1")}
         </p>
       </div>
 
@@ -119,7 +121,7 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <MessageSquare className="w-4 h-4 text-[#6c47ff]" />
-          Din anmeldelse *
+          {t("reviews.yourReview")} *
         </label>
         <textarea
           id="reviewText"
@@ -132,10 +134,10 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
             setFormData({ ...formData, reviewText: e.target.value })
           }
           className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700 resize-none"
-          placeholder="Del dine tanker om filmen..."
+          placeholder={t("reviews.reviewPlaceholder")}
         />
         <p className="text-xs text-gray-500 text-right">
-          {formData.reviewText.length}/2000 tegn
+          {formData.reviewText.length}/2000 {t("reviews.characters")}
         </p>
       </div>
 
@@ -149,12 +151,12 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
             {loading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Publiserer...
+                {t("reviews.publishing")}
               </>
             ) : (
               <>
                 <MessageSquare className="w-5 h-5" />
-                Publiser anmeldelse
+                {t("reviews.publish")}
               </>
             )}
           </span>
@@ -164,6 +166,7 @@ export default function ReviewForm({ movieId }: ReviewFormProps) {
           type="button"
           onClick={() => setShowForm(false)}
           disabled={loading}
+          aria-label={t("common.cancel")}
           className="px-8 py-4 border border-gray-800 rounded-xl font-semibold hover:bg-gray-900/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 disabled:hover:translate-y-0"
         >
           <X className="w-5 h-5" />

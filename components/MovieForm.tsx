@@ -1,8 +1,4 @@
-/*
- * File: components/MovieForm.tsx
- * Location: Client-side form component for creating new movies
- */
-
+// components/MovieForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -18,8 +14,10 @@ import {
   FileText,
   Clock,
 } from "lucide-react";
+import { useT } from "@/components/I18nProvider"; // 👈
 
 export default function MovieForm() {
+  const t = useT(); // 👈
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,13 +46,15 @@ export default function MovieForm() {
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Failed to create movie");
+        throw new Error(data.error || t("movieForm.errorGeneric")); // 👈 fallback i18n
       }
 
       router.push(`/movies/${data.data._id}`);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(
+        err instanceof Error ? err.message : t("movieForm.errorGeneric")
+      );
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ export default function MovieForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="flex items-start gap-3 bg-red-500/10 border border-red-500/50 rounded-xl p-4 text-red-400 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="flex items-start gap-3 bg-red-500/10 border border-red-500/50 rounded-xl p-4 text-red-400">
           <AlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
           <p className="text-sm">{error}</p>
         </div>
@@ -75,7 +75,7 @@ export default function MovieForm() {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <Film className="w-4 h-4 text-[#6c47ff]" />
-          Tittel *
+          {t("movieForm.titleLabel")} *
         </label>
         <input
           type="text"
@@ -84,8 +84,8 @@ export default function MovieForm() {
           maxLength={200}
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Inception"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("movieForm.titlePlaceholder")}
         />
       </div>
 
@@ -95,7 +95,7 @@ export default function MovieForm() {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <User className="w-4 h-4 text-[#6c47ff]" />
-          Regissør *
+          {t("movieForm.directorLabel")} *
         </label>
         <input
           type="text"
@@ -106,8 +106,8 @@ export default function MovieForm() {
           onChange={(e) =>
             setFormData({ ...formData, director: e.target.value })
           }
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Christopher Nolan"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("movieForm.directorPlaceholder")}
         />
       </div>
 
@@ -118,7 +118,7 @@ export default function MovieForm() {
             className="flex items-center gap-2 text-sm font-semibold text-gray-300"
           >
             <Calendar className="w-4 h-4 text-[#6c47ff]" />
-            Utgivelsesår *
+            {t("movieForm.yearLabel")} *
           </label>
           <input
             type="number"
@@ -133,7 +133,7 @@ export default function MovieForm() {
                 releaseYear: parseInt(e.target.value),
               })
             }
-            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
           />
         </div>
 
@@ -143,7 +143,7 @@ export default function MovieForm() {
             className="flex items-center gap-2 text-sm font-semibold text-gray-300"
           >
             <Clock className="w-4 h-4 text-[#6c47ff]" />
-            Lengde (minutter)
+            {t("movieForm.runtimeLabel")}
           </label>
           <input
             type="number"
@@ -157,8 +157,8 @@ export default function MovieForm() {
                 runtime: e.target.value ? parseInt(e.target.value) : undefined,
               })
             }
-            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-            placeholder="F.eks. 148"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+            placeholder={t("movieForm.runtimePlaceholder")}
           />
         </div>
       </div>
@@ -169,7 +169,7 @@ export default function MovieForm() {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <Tag className="w-4 h-4 text-[#6c47ff]" />
-          Sjanger *
+          {t("movieForm.genreLabel")} *
         </label>
         <input
           type="text"
@@ -178,8 +178,8 @@ export default function MovieForm() {
           maxLength={50}
           value={formData.genre}
           onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Sci-Fi, Action, Drama"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("movieForm.genrePlaceholder")}
         />
       </div>
 
@@ -189,7 +189,7 @@ export default function MovieForm() {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <FileText className="w-4 h-4 text-[#6c47ff]" />
-          Beskrivelse
+          {t("movieForm.descriptionLabel")}
         </label>
         <textarea
           id="description"
@@ -199,11 +199,11 @@ export default function MovieForm() {
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700 resize-none"
-          placeholder="Skriv et kort sammendrag av filmen..."
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700 resize-none"
+          placeholder={t("movieForm.descriptionPlaceholder")}
         />
         <p className="text-xs text-gray-500 text-right">
-          {formData.description?.length || 0}/500
+          {formData.description?.length || 0}/500 {t("movieForm.characters")}
         </p>
       </div>
 
@@ -217,12 +217,12 @@ export default function MovieForm() {
             {loading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Legger til...
+                {t("movieForm.submitting")}
               </>
             ) : (
               <>
                 <Film className="w-5 h-5" />
-                Legg til film
+                {t("movieForm.submit")}
               </>
             )}
           </span>
@@ -234,7 +234,7 @@ export default function MovieForm() {
           disabled={loading}
           className="px-8 py-4 border border-gray-800 rounded-xl font-semibold hover:bg-gray-900/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 disabled:hover:translate-y-0"
         >
-          Avbryt
+          {t("common.cancel")}
         </button>
       </div>
     </form>

@@ -1,0 +1,106 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "tagline": "Explora y comparte tus opiniones sobre películas"
+  },
+  "nav": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse"
+  },
+  "home": {
+    "title": "Reseñas de películas",
+    "addMovie": "Agregar película",
+    "noMovies": "Aún no se han agregado películas",
+    "beFirst": "Sé el primero en agregar una película →",
+    "noMatches": "Ninguna película coincide con tus filtros",
+    "showing": "Mostrando {count} de {total} películas"
+  },
+  "filters": {
+    "searchPlaceholder": "Buscar por título, director o género...",
+    "filtersButton": "Filtros y orden",
+    "reset": "Restablecer",
+    "genre": "Género",
+    "allGenres": "Todos los géneros",
+    "sortBy": "Ordenar por",
+    "yearNewest": "Año de estreno (más reciente)",
+    "yearOldest": "Año de estreno (más antiguo)",
+    "titleAsc": "Título (A–Z)",
+    "titleDesc": "Título (Z–A)",
+    "addedLast": "Agregado más recientemente",
+    "addedFirst": "Agregado primero",
+    "yearRange": "Año de estreno: {min} - {max}"
+  },
+  "movie": {
+    "backToAll": "Volver a todas las películas",
+    "directedBy": "Dirigida por",
+    "minutes": "min",
+    "edit": "Editar película",
+    "delete": "Eliminar"
+  },
+  "movieForm": {
+    "addTitle": "Agregar nueva película",
+    "addSubtitle": "Comparte una película que quieras que otros descubran",
+    "editTitle": "Editar película",
+    "editSubtitle": "Actualizar información sobre {title}",
+
+    "titleLabel": "Título",
+    "titlePlaceholder": "Ej. Inception",
+    "directorLabel": "Director",
+    "directorPlaceholder": "Ej. Christopher Nolan",
+    "yearLabel": "Año de estreno",
+    "runtimeLabel": "Duración (minutos)",
+    "runtimePlaceholder": "Ej. 148",
+    "genreLabel": "Género",
+    "genrePlaceholder": "Ej. Ciencia ficción, Acción, Drama",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Escribe un breve resumen de la película...",
+    "characters": "caracteres",
+    "submit": "Agregar película",
+    "submitting": "Agregando...",
+    "errorGeneric": "No se pudo crear la película"
+  },
+  "editForm": {
+    "titleLabel": "Título",
+    "titlePlaceholder": "Ej. Inception",
+    "directorLabel": "Director",
+    "directorPlaceholder": "Ej. Christopher Nolan",
+    "yearLabel": "Año de estreno",
+    "runtimeLabel": "Duración (minutos)",
+    "runtimePlaceholder": "Ej. 148",
+    "genreLabel": "Género",
+    "genrePlaceholder": "Ej. Ciencia ficción, Acción, Drama",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Escribe un breve resumen de la película...",
+    "submit": "Guardar cambios",
+    "submitting": "Guardando...",
+    "errorGeneric": "No se pudo actualizar la película"
+  },
+  "reviews": {
+    "title": "Reseñas",
+    "titleWithCount": "Reseñas ({count})",
+    "writeReview": "Escribir una reseña",
+    "yourRating": "Tu calificación",
+    "ratingLabel5": "¡Increíble!",
+    "ratingLabel4": "Muy buena",
+    "ratingLabel3": "Regular",
+    "ratingLabel2": "Débil",
+    "ratingLabel1": "Mala",
+    "yourReview": "Tu reseña",
+    "yourReviewLabel": "Tu reseña",
+    "reviewPlaceholder": "Comparte tus pensamientos sobre la película...",
+    "characters": "caracteres",
+    "publish": "Publicar reseña",
+    "publishing": "Publicando...",
+    "noReviews": "Aún no hay reseñas. ¡Sé el primero en reseñar esta película!",
+    "loginToReview": "para agregar una reseña",
+    "errorGeneric": "No se pudo publicar la reseña"
+  },
+  "delete": {
+    "confirmTitle": "Confirmar eliminación",
+    "confirmMovie": "¿Estás seguro de que quieres eliminar esta película? Todas las reseñas asociadas también se eliminarán.",
+    "confirmReview": "¿Estás seguro de que quieres eliminar esta reseña?",
+    "deleting": "Eliminando...",
+    "delete": "Sí, eliminar",
+    "errorGeneric": "No se pudo eliminar"
+  }
+}

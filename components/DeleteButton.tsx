@@ -8,6 +8,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2, Loader2, AlertTriangle } from "lucide-react";
+import { useT } from "@/components/I18nProvider";
 
 interface DeleteButtonProps {
   itemId: string;
@@ -22,6 +23,7 @@ export default function DeleteButton({
   movieId,
   onSuccess,
 }: DeleteButtonProps) {
+  const t = useT();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -41,7 +43,7 @@ export default function DeleteButton({
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Failed to delete");
+        throw new Error(data.error || t("delete.errorGeneric"));
       }
 
       if (itemType === "movie") {
@@ -51,7 +53,7 @@ export default function DeleteButton({
         router.refresh();
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : t("delete.errorGeneric"));
     } finally {
       setLoading(false);
     }
@@ -62,27 +64,34 @@ export default function DeleteButton({
       <button
         onClick={() => setShowConfirm(true)}
         className="inline-flex items-center gap-2 px-4 py-2 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-500/10 transition-all"
+        aria-label={t("movie.delete")}
       >
         <Trash2 className="w-4 h-4" />
-        Slett
+        {t("movie.delete")}
       </button>
     );
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-dialog-title"
+    >
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-md w-full space-y-4">
         <div className="flex items-start gap-3">
           <div className="p-2 rounded-lg bg-red-500/10">
             <AlertTriangle className="w-6 h-6 text-red-500" />
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-2">Bekreft sletting</h3>
+            <h3 id="delete-dialog-title" className="text-xl font-bold mb-2">
+              {t("delete.confirmTitle")}
+            </h3>
             <p className="text-gray-400">
-              Er du sikker på at du vil slette dette{" "}
-              {itemType === "movie" ? "filmen" : "anmeldelsen"}?
-              {itemType === "movie" &&
-                " Alle tilhørende anmeldelser vil også bli slettet."}
+              {itemType === "movie"
+                ? t("delete.confirmMovie")
+                : t("delete.confirmReview")}
             </p>
           </div>
         </div>
@@ -102,12 +111,12 @@ export default function DeleteButton({
             {loading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Sletter...
+                {t("delete.deleting")}
               </>
             ) : (
               <>
                 <Trash2 className="w-5 h-5" />
-                Ja, slett
+                {t("delete.delete")}
               </>
             )}
           </button>
@@ -117,7 +126,7 @@ export default function DeleteButton({
             disabled={loading}
             className="px-6 py-3 border border-gray-800 rounded-lg font-semibold hover:bg-gray-900/50 transition-all disabled:opacity-50"
           >
-            Avbryt
+            {t("common.cancel")}
           </button>
         </div>
       </div>

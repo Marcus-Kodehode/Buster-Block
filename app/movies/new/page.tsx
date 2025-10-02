@@ -8,12 +8,25 @@ import { redirect } from "next/navigation";
 import MovieForm from "@/components/MovieForm";
 import { Film, Sparkles } from "lucide-react";
 
+import { cookies } from "next/headers";
+import {
+  normalizeLocale,
+  defaultLocale,
+  loadMessages,
+  createTranslator,
+  type Locale,
+} from "@/lib/i18n";
+
 export default async function NewMoviePage() {
   const { userId } = await auth();
+  if (!userId) redirect("/sign-in");
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
+  // i18n (server)
+  const cookieStore = await cookies();
+  const raw = cookieStore.get("lang")?.value;
+  const locale: Locale = normalizeLocale(raw) ?? defaultLocale;
+  const messages = await loadMessages(locale);
+  const t = createTranslator(messages);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -23,11 +36,11 @@ export default async function NewMoviePage() {
         <div className="relative">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-white via-[#06b6d4] to-[#ec4899] bg-clip-text text-transparent pb-2 flex items-center gap-3">
             <Film className="w-10 h-10 text-[#6c47ff]" />
-            Legg til ny film
+            {t("movieForm.addTitle")}
           </h1>
           <p className="text-gray-400 text-lg flex items-center gap-2 mt-2">
             <Sparkles className="w-5 h-5 text-[#06b6d4]" />
-            Del en film du vil at andre skal oppdage
+            {t("movieForm.addSubtitle")}
           </p>
         </div>
       </div>

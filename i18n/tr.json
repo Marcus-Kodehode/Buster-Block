@@ -1,0 +1,106 @@
+{
+  "common": {
+    "cancel": "İptal",
+    "tagline": "Filmler hakkında görüşlerini keşfet ve paylaş"
+  },
+  "nav": {
+    "signIn": "Giriş yap",
+    "signUp": "Kayıt ol"
+  },
+  "home": {
+    "title": "Film İncelemeleri",
+    "addMovie": "Film Ekle",
+    "noMovies": "Henüz eklenmiş film yok",
+    "beFirst": "İlk filmi ekleyen sen ol →",
+    "noMatches": "Filtrelerine uyan film bulunamadı",
+    "showing": "{total} filmin {count} tanesi gösteriliyor"
+  },
+  "filters": {
+    "searchPlaceholder": "Başlık, yönetmen veya türe göre ara...",
+    "filtersButton": "Filtreler ve sıralama",
+    "reset": "Sıfırla",
+    "genre": "Tür",
+    "allGenres": "Tüm türler",
+    "sortBy": "Sırala",
+    "yearNewest": "Vizyon yılı (yeniden eskiye)",
+    "yearOldest": "Vizyon yılı (eskiden yeniye)",
+    "titleAsc": "Başlık (A–Z)",
+    "titleDesc": "Başlık (Z–A)",
+    "addedLast": "En son eklenen",
+    "addedFirst": "Önce eklenen",
+    "yearRange": "Vizyon yılı: {min} - {max}"
+  },
+  "movie": {
+    "backToAll": "Tüm filmlere dön",
+    "directedBy": "Yönetmen",
+    "minutes": "dk",
+    "edit": "Filmi düzenle",
+    "delete": "Sil"
+  },
+  "movieForm": {
+    "addTitle": "Yeni film ekle",
+    "addSubtitle": "Başkalarının keşfetmesini istediğin bir filmi paylaş",
+    "editTitle": "Filmi düzenle",
+    "editSubtitle": "{title} hakkında bilgileri güncelle",
+
+    "titleLabel": "Başlık",
+    "titlePlaceholder": "örn. Inception",
+    "directorLabel": "Yönetmen",
+    "directorPlaceholder": "örn. Christopher Nolan",
+    "yearLabel": "Vizyon yılı",
+    "runtimeLabel": "Süre (dakika)",
+    "runtimePlaceholder": "örn. 148",
+    "genreLabel": "Tür",
+    "genrePlaceholder": "örn. Bilim Kurgu, Aksiyon, Dram",
+    "descriptionLabel": "Açıklama",
+    "descriptionPlaceholder": "Film hakkında kısa bir özet yaz...",
+    "characters": "karakter",
+    "submit": "Filmi ekle",
+    "submitting": "Ekleniyor...",
+    "errorGeneric": "Film oluşturulamadı"
+  },
+  "editForm": {
+    "titleLabel": "Başlık",
+    "titlePlaceholder": "örn. Inception",
+    "directorLabel": "Yönetmen",
+    "directorPlaceholder": "örn. Christopher Nolan",
+    "yearLabel": "Vizyon yılı",
+    "runtimeLabel": "Süre (dakika)",
+    "runtimePlaceholder": "örn. 148",
+    "genreLabel": "Tür",
+    "genrePlaceholder": "örn. Bilim Kurgu, Aksiyon, Dram",
+    "descriptionLabel": "Açıklama",
+    "descriptionPlaceholder": "Film hakkında kısa bir özet yaz...",
+    "submit": "Değişiklikleri kaydet",
+    "submitting": "Kaydediliyor...",
+    "errorGeneric": "Film güncellenemedi"
+  },
+  "reviews": {
+    "title": "İncelemeler",
+    "titleWithCount": "İncelemeler ({count})",
+    "writeReview": "İnceleme yaz",
+    "yourRating": "Puanın",
+    "ratingLabel5": "Harika!",
+    "ratingLabel4": "Çok iyi",
+    "ratingLabel3": "Fena değil",
+    "ratingLabel2": "Zayıf",
+    "ratingLabel1": "Kötü",
+    "yourReview": "İncelemen",
+    "yourReviewLabel": "İncelemen",
+    "reviewPlaceholder": "Film hakkındaki düşüncelerini paylaş...",
+    "characters": "karakter",
+    "publish": "İncelemeyi yayımla",
+    "publishing": "Yayımlanıyor...",
+    "noReviews": "Henüz inceleme yok. Bu filmi ilk sen değerlendir!",
+    "loginToReview": "inceleme eklemek için",
+    "errorGeneric": "İnceleme gönderilemedi"
+  },
+  "delete": {
+    "confirmTitle": "Silme işlemini onayla",
+    "confirmMovie": "Bu filmi silmek istediğinden emin misin? İlgili tüm incelemeler de silinecek.",
+    "confirmReview": "Bu incelemeyi silmek istediğinden emin misin?",
+    "deleting": "Siliniyor...",
+    "delete": "Evet, sil",
+    "errorGeneric": "Silme işlemi başarısız"
+  }
+}

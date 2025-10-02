@@ -13,12 +13,19 @@ import MovieFilters, { FilterState } from "@/components/MovieFilters";
 import type { Movie } from "@/types";
 import { Film, Sparkles } from "lucide-react";
 
+// 👇 importer fra i18n-contexten din
+import { useI18n, useT } from "@/components/I18nProvider";
+
+
 interface HomeClientProps {
   movies: Movie[];
   userId: string | null;
 }
 
 export default function HomeClient({ movies, userId }: HomeClientProps) {
+  const { locale } = useI18n();   // <- henter gjeldende språk
+  const t = useT();               // <- oversetter-funksjon
+
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     genre: "",
@@ -28,19 +35,19 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
 
   const availableGenres = useMemo(() => {
     const genres = new Set(movies.map((m) => m.genre));
-    return Array.from(genres).sort();
-  }, [movies]);
+    return Array.from(genres).sort((a, b) => a.localeCompare(b, locale));
+  }, [movies, locale]);
 
   const filteredMovies = useMemo(() => {
     let result = [...movies];
 
     if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
+      const q = filters.search.toLowerCase();
       result = result.filter(
         (movie) =>
-          movie.title.toLowerCase().includes(searchLower) ||
-          movie.director.toLowerCase().includes(searchLower) ||
-          movie.genre.toLowerCase().includes(searchLower)
+          movie.title.toLowerCase().includes(q) ||
+          movie.director.toLowerCase().includes(q) ||
+          movie.genre.toLowerCase().includes(q)
       );
     }
 
@@ -54,7 +61,6 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
         movie.releaseYear <= filters.yearRange[1]
     );
 
-    // Sort
     switch (filters.sortBy) {
       case "newest":
         result.sort(
@@ -69,10 +75,10 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
         );
         break;
       case "title-asc":
-        result.sort((a, b) => a.title.localeCompare(b.title, "no"));
+        result.sort((a, b) => a.title.localeCompare(b.title, locale));
         break;
       case "title-desc":
-        result.sort((a, b) => b.title.localeCompare(a.title, "no"));
+        result.sort((a, b) => b.title.localeCompare(a.title, locale));
         break;
       case "year-desc":
         result.sort((a, b) => b.releaseYear - a.releaseYear);
@@ -83,18 +89,18 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
     }
 
     return result;
-  }, [movies, filters]);
+  }, [movies, filters, locale]);
 
   return (
     <div className="space-y-10">
       <div className="flex items-center justify-between">
         <div className="space-y-3">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-white via-[#06b6d4] to-[#ec4899] bg-clip-text text-transparent animate-in fade-in slide-in-from-bottom-3 duration-700 pb-2">
-            Filmanmeldelser
+            {t("home.title")}
           </h1>
           <p className="text-gray-400 text-lg flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#06b6d4]" />
-            Utforsk og del dine meninger om filmer
+            {t("common.tagline")}
           </p>
         </div>
 
@@ -106,7 +112,7 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative flex items-center gap-2">
               <Film className="w-5 h-5" />
-              Legg til film
+              {t("home.addMovie")}
             </span>
           </Link>
         )}
@@ -124,15 +130,13 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
                 className="object-contain opacity-50"
               />
             </div>
-            <p className="text-gray-400 text-lg mb-6">
-              Ingen filmer lagt til ennå
-            </p>
+            <p className="text-gray-400 text-lg mb-6">{t("home.noMovies")}</p>
             {userId && (
               <Link
                 href="/movies/new"
                 className="inline-block bg-gradient-to-r from-[#1e40af] to-[#fbbf24] bg-clip-text text-transparent font-semibold text-lg hover:from-[#fbbf24] hover:to-[#1e40af] transition-all"
               >
-                Bli den første til å legge til en film →
+                {t("home.beFirst")}
               </Link>
             )}
           </div>
@@ -146,14 +150,15 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
 
           {filteredMovies.length === 0 ? (
             <div className="text-center py-16 border border-gray-800 rounded-xl bg-gray-900/30">
-              <p className="text-gray-400 text-lg">
-                Ingen filmer matcher dine filtre
-              </p>
+              <p className="text-gray-400 text-lg">{t("home.noMatches")}</p>
             </div>
           ) : (
             <div>
               <p className="text-sm text-gray-500 mb-4">
-                Viser {filteredMovies.length} av {movies.length} filmer
+                {t("home.showing", {
+                  count: filteredMovies.length,
+                  total: movies.length,
+                })}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredMovies.map((movie) => (

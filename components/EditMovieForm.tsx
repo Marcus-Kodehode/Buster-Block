@@ -19,12 +19,14 @@ import {
   Clock,
 } from "lucide-react";
 import type { Movie } from "@/types";
+import { useT } from "@/components/I18nProvider"; // 👈
 
 interface EditMovieFormProps {
   movie: Movie;
 }
 
 export default function EditMovieForm({ movie }: EditMovieFormProps) {
+  const t = useT(); // 👈
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -53,13 +55,13 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Failed to update movie");
+        throw new Error(data.error || t("editForm.errorGeneric")); // 👈
       }
 
       router.push(`/movies/${movie._id}`);
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : t("editForm.errorGeneric"));
     } finally {
       setLoading(false);
     }
@@ -80,7 +82,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <Film className="w-4 h-4 text-[#6c47ff]" />
-          Tittel *
+          {t("editForm.titleLabel")} *
         </label>
         <input
           type="text"
@@ -89,8 +91,8 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           maxLength={200}
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Inception"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("editForm.titlePlaceholder")}
         />
       </div>
 
@@ -100,7 +102,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <User className="w-4 h-4 text-[#6c47ff]" />
-          Regissør *
+          {t("editForm.directorLabel")} *
         </label>
         <input
           type="text"
@@ -111,8 +113,8 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           onChange={(e) =>
             setFormData({ ...formData, director: e.target.value })
           }
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Christopher Nolan"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("editForm.directorPlaceholder")}
         />
       </div>
 
@@ -123,7 +125,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
             className="flex items-center gap-2 text-sm font-semibold text-gray-300"
           >
             <Calendar className="w-4 h-4 text-[#6c47ff]" />
-            Utgivelsesår *
+            {t("editForm.yearLabel")} *
           </label>
           <input
             type="number"
@@ -138,7 +140,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
                 releaseYear: parseInt(e.target.value),
               })
             }
-            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
           />
         </div>
 
@@ -148,7 +150,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
             className="flex items-center gap-2 text-sm font-semibold text-gray-300"
           >
             <Clock className="w-4 h-4 text-[#6c47ff]" />
-            Lengde (minutter)
+            {t("editForm.runtimeLabel")}
           </label>
           <input
             type="number"
@@ -162,8 +164,8 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
                 runtime: e.target.value ? parseInt(e.target.value) : undefined,
               })
             }
-            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-            placeholder="F.eks. 148"
+            className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+            placeholder={t("editForm.runtimePlaceholder")}
           />
         </div>
       </div>
@@ -174,7 +176,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <Tag className="w-4 h-4 text-[#6c47ff]" />
-          Sjanger *
+          {t("editForm.genreLabel")} *
         </label>
         <input
           type="text"
@@ -183,8 +185,8 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           maxLength={50}
           value={formData.genre}
           onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
-          placeholder="F.eks. Sci-Fi, Action, Drama"
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
+          placeholder={t("editForm.genrePlaceholder")}
         />
       </div>
 
@@ -194,7 +196,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           className="flex items-center gap-2 text-sm font-semibold text-gray-300"
         >
           <FileText className="w-4 h-4 text-[#6c47ff]" />
-          Beskrivelse
+          {t("editForm.descriptionLabel")}
         </label>
         <textarea
           id="description"
@@ -204,12 +206,9 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700 resize-none"
-          placeholder="Skriv et kort sammendrag av filmen..."
+          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700 resize-none"
+          placeholder={t("editForm.descriptionPlaceholder")}
         />
-        <p className="text-xs text-gray-500 text-right">
-          {formData.description?.length || 0}/500
-        </p>
       </div>
 
       <div className="flex gap-4 pt-4">
@@ -222,12 +221,12 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
             {loading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Lagrer...
+                {t("editForm.submitting")}
               </>
             ) : (
               <>
                 <Film className="w-5 h-5" />
-                Lagre endringer
+                {t("editForm.submit")}
               </>
             )}
           </span>
@@ -239,7 +238,7 @@ export default function EditMovieForm({ movie }: EditMovieFormProps) {
           disabled={loading}
           className="px-8 py-4 border border-gray-800 rounded-xl font-semibold hover:bg-gray-900/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 disabled:hover:translate-y-0"
         >
-          Avbryt
+          {t("common.cancel")}
         </button>
       </div>
     </form>

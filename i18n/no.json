@@ -1,16 +1,19 @@
 {
   "common": {
-    "appName": "Buster Block",
+    "cancel": "Avbryt",
     "tagline": "Utforsk og del dine meninger om filmer"
   },
-  "nav": { "signIn": "Logg inn", "signUp": "Registrer deg" },
+  "nav": {
+    "signIn": "Logg inn",
+    "signUp": "Registrer deg"
+  },
   "home": {
     "title": "Filmanmeldelser",
     "addMovie": "Legg til film",
     "noMovies": "Ingen filmer lagt til ennå",
-    "beFirst": "Bli den første til å legge til en film",
-    "showing": "Viser {count} av {total} filmer",
-    "noMatches": "Ingen filmer matcher dine filtre"
+    "beFirst": "Bli den første til å legge til en film →",
+    "noMatches": "Ingen filmer matcher dine filtre",
+    "showing": "Viser {count} av {total} filmer"
   },
   "filters": {
     "searchPlaceholder": "Søk etter tittel, regissør eller sjanger...",
@@ -28,9 +31,76 @@
     "yearRange": "Utgivelsesår: {min} - {max}"
   },
   "movie": {
+    "backToAll": "Tilbake til alle filmer",
     "directedBy": "Regissert av",
     "minutes": "min",
     "edit": "Rediger film",
     "delete": "Slett"
+  },
+  "movieForm": {
+    "addTitle": "Legg til ny film",
+    "addSubtitle": "Del en film du vil at andre skal oppdage",
+    "editTitle": "Rediger film",
+    "editSubtitle": "Oppdater informasjonen om {title}",
+
+    "titleLabel": "Tittel",
+    "titlePlaceholder": "F.eks. Inception",
+    "directorLabel": "Regissør",
+    "directorPlaceholder": "F.eks. Christopher Nolan",
+    "yearLabel": "Utgivelsesår",
+    "runtimeLabel": "Lengde (minutter)",
+    "runtimePlaceholder": "F.eks. 148",
+    "genreLabel": "Sjanger",
+    "genrePlaceholder": "F.eks. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Beskrivelse",
+    "descriptionPlaceholder": "Skriv et kort sammendrag av filmen...",
+    "characters": "tegn",
+    "submit": "Legg til film",
+    "submitting": "Legger til...",
+    "errorGeneric": "Kunne ikke opprette film"
+  },
+  "editForm": {
+    "titleLabel": "Tittel",
+    "titlePlaceholder": "F.eks. Inception",
+    "directorLabel": "Regissør",
+    "directorPlaceholder": "F.eks. Christopher Nolan",
+    "yearLabel": "Utgivelsesår",
+    "runtimeLabel": "Lengde (minutter)",
+    "runtimePlaceholder": "F.eks. 148",
+    "genreLabel": "Sjanger",
+    "genrePlaceholder": "F.eks. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Beskrivelse",
+    "descriptionPlaceholder": "Skriv et kort sammendrag av filmen...",
+    "submit": "Lagre endringer",
+    "submitting": "Lagrer...",
+    "errorGeneric": "Kunne ikke oppdatere film"
+  },
+  "reviews": {
+    "title": "Anmeldelser",
+    "titleWithCount": "Anmeldelser ({count})",
+    "writeReview": "Skriv en anmeldelse",
+    "yourRating": "Din vurdering",
+    "ratingLabel5": "Fantastisk!",
+    "ratingLabel4": "Veldig bra",
+    "ratingLabel3": "Grei",
+    "ratingLabel2": "Svak",
+    "ratingLabel1": "Dårlig",
+    "yourReview": "Din anmeldelse",
+    "yourReviewLabel": "Din anmeldelse",
+    "reviewPlaceholder": "Del dine tanker om filmen...",
+    "characters": "tegn",
+    "publish": "Publiser anmeldelse",
+    "publishing": "Publiserer...",
+    "noReviews": "Ingen anmeldelser ennå. Bli den første til å anmelde denne filmen!",
+    "loginToReview": "for å legge til en anmeldelse",
+    "errorGeneric": "Kunne ikke publisere anmeldelse"
+  },
+  "delete": {
+    "confirmTitle": "Bekreft sletting",
+    "confirmMovie": "Er du sikker på at du vil slette denne filmen? Alle tilhørende anmeldelser vil også bli slettet.",
+    "confirmReview": "Er du sikker på at du vil slette denne anmeldelsen?",
+    "deleting": "Sletter...",
+    "delete": "Ja, slett",
+    "errorGeneric": "Kunne ikke slette"
   }
 }

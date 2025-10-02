@@ -1,12 +1,9 @@
-/*
- * File: components/MovieFilters.tsx
- * Location: Client-side component for movie filtering functionality
- */
-
+// components/MovieFilters.tsx
 "use client";
 
 import { useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import { useT } from "@/components/I18nProvider"; // 👈
 
 interface MovieFiltersProps {
   onFilterChange: (filters: FilterState) => void;
@@ -30,6 +27,7 @@ export default function MovieFilters({
   onFilterChange,
   availableGenres,
 }: MovieFiltersProps) {
+  const t = useT(); // 👈
   const currentYear = new Date().getFullYear();
   const [showFilters, setShowFilters] = useState(false);
 
@@ -47,14 +45,14 @@ export default function MovieFilters({
   };
 
   const resetFilters = () => {
-    const defaultFilters: FilterState = {
+    const def: FilterState = {
       search: "",
       genre: "",
       sortBy: "year-desc",
       yearRange: [1888, currentYear + 5],
     };
-    setFilters(defaultFilters);
-    onFilterChange(defaultFilters);
+    setFilters(def);
+    onFilterChange(def);
   };
 
   const hasActiveFilters =
@@ -71,48 +69,49 @@ export default function MovieFilters({
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
         <input
           type="text"
-          placeholder="Søk etter tittel, regissør eller sjanger..."
+          placeholder={t("filters.searchPlaceholder")} // 👈
           value={filters.search}
           onChange={(e) => updateFilters({ search: e.target.value })}
-          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all placeholder:text-gray-600 hover:border-gray-700"
+          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
         />
       </div>
 
-      {/* Filter toggle button */}
+      {/* Toggle + reset */}
       <div className="flex items-center gap-3">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/50 border border-gray-800 rounded-lg hover:border-gray-700 transition-all"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/50 border border-gray-800 rounded-lg hover:border-gray-700"
         >
           <SlidersHorizontal className="w-4 h-4" />
-          Filtre og sortering
+          {t("filters.filtersButton")}
         </button>
 
         {hasActiveFilters && (
           <button
             onClick={resetFilters}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-gray-300"
           >
             <X className="w-4 h-4" />
-            Nullstill
+            {t("filters.reset")}
           </button>
         )}
       </div>
 
-      {/* Filters panel */}
+      {/* Panel */}
       {showFilters && (
-        <div className="border border-gray-800 rounded-xl p-6 bg-gray-900/30 space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
-          {/* Genre filter */}
+        <div className="border border-gray-800 rounded-xl p-6 bg-gray-900/30 space-y-6">
+          {/* Genre */}
           <div className="space-y-2">
             <label className="text-sm font-semibold text-gray-300">
-              Sjanger
+              {t("filters.genre")}
             </label>
             <select
               value={filters.genre}
               onChange={(e) => updateFilters({ genre: e.target.value })}
-              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all text-gray-300 cursor-pointer hover:border-gray-700"
+              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "right 0.75rem center",
                 backgroundSize: "1.5em 1.5em",
@@ -120,7 +119,7 @@ export default function MovieFilters({
               }}
             >
               <option value="" className="bg-[#0a0a0a] text-gray-300">
-                Alle sjangere
+                {t("filters.allGenres")}
               </option>
               {availableGenres.map((genre) => (
                 <option
@@ -134,10 +133,10 @@ export default function MovieFilters({
             </select>
           </div>
 
-          {/* Sort by */}
+          {/* Sort */}
           <div className="space-y-2">
             <label className="text-sm font-semibold text-gray-300">
-              Sorter etter
+              {t("filters.sortBy")}
             </label>
             <select
               value={filters.sortBy}
@@ -146,9 +145,10 @@ export default function MovieFilters({
                   sortBy: e.target.value as FilterState["sortBy"],
                 })
               }
-              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all text-gray-300 cursor-pointer hover:border-gray-700"
+              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "right 0.75rem center",
                 backgroundSize: "1.5em 1.5em",
@@ -156,22 +156,22 @@ export default function MovieFilters({
               }}
             >
               <option value="year-desc" className="bg-[#0a0a0a] text-gray-300">
-                Utgivelsesår (nyest)
+                {t("filters.yearNewest")}
               </option>
               <option value="year-asc" className="bg-[#0a0a0a] text-gray-300">
-                Utgivelsesår (eldst)
+                {t("filters.yearOldest")}
               </option>
               <option value="title-asc" className="bg-[#0a0a0a] text-gray-300">
-                Tittel (A-Å)
+                {t("filters.titleAsc")}
               </option>
               <option value="title-desc" className="bg-[#0a0a0a] text-gray-300">
-                Tittel (Å-A)
+                {t("filters.titleDesc")}
               </option>
               <option value="newest" className="bg-[#0a0a0a] text-gray-300">
-                Sist lagt til
+                {t("filters.addedLast")}
               </option>
               <option value="oldest" className="bg-[#0a0a0a] text-gray-300">
-                Først lagt til
+                {t("filters.addedFirst")}
               </option>
             </select>
           </div>
@@ -179,7 +179,10 @@ export default function MovieFilters({
           {/* Year range */}
           <div className="space-y-3">
             <label className="text-sm font-semibold text-gray-300">
-              Utgivelsesår: {filters.yearRange[0]} - {filters.yearRange[1]}
+              {t("filters.yearRange", {
+                min: filters.yearRange[0],
+                max: filters.yearRange[1],
+              })}
             </label>
             <div className="space-y-2">
               <input

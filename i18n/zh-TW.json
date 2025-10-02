@@ -1,0 +1,106 @@
+{
+  "common": {
+    "cancel": "取消",
+    "tagline": "探索並分享你對電影的看法"
+  },
+  "nav": {
+    "signIn": "登入",
+    "signUp": "註冊"
+  },
+  "home": {
+    "title": "電影評論",
+    "addMovie": "新增電影",
+    "noMovies": "目前尚未新增任何電影",
+    "beFirst": "成為第一個新增電影的人 →",
+    "noMatches": "沒有符合篩選條件的電影",
+    "showing": "顯示 {total} 部中的 {count} 部電影"
+  },
+  "filters": {
+    "searchPlaceholder": "以片名、導演或類型搜尋…",
+    "filtersButton": "篩選與排序",
+    "reset": "重設",
+    "genre": "類型",
+    "allGenres": "所有類型",
+    "sortBy": "排序方式",
+    "yearNewest": "上映年份（新→舊）",
+    "yearOldest": "上映年份（舊→新）",
+    "titleAsc": "片名（A–Z）",
+    "titleDesc": "片名（Z–A）",
+    "addedLast": "最近新增",
+    "addedFirst": "最早新增",
+    "yearRange": "上映年份：{min} - {max}"
+  },
+  "movie": {
+    "backToAll": "返回所有電影",
+    "directedBy": "導演",
+    "minutes": "分鐘",
+    "edit": "編輯電影",
+    "delete": "刪除"
+  },
+  "movieForm": {
+    "addTitle": "新增電影",
+    "addSubtitle": "分享一部你想讓大家發現的電影",
+    "editTitle": "編輯電影",
+    "editSubtitle": "更新 {title} 的資訊",
+
+    "titleLabel": "片名",
+    "titlePlaceholder": "例如：Inception",
+    "directorLabel": "導演",
+    "directorPlaceholder": "例如：Christopher Nolan",
+    "yearLabel": "上映年份",
+    "runtimeLabel": "片長（分鐘）",
+    "runtimePlaceholder": "例如：148",
+    "genreLabel": "類型",
+    "genrePlaceholder": "例如：科幻、動作、劇情",
+    "descriptionLabel": "簡介",
+    "descriptionPlaceholder": "寫一段電影的簡短摘要…",
+    "characters": "字元",
+    "submit": "新增電影",
+    "submitting": "新增中…",
+    "errorGeneric": "新增電影失敗"
+  },
+  "editForm": {
+    "titleLabel": "片名",
+    "titlePlaceholder": "例如：Inception",
+    "directorLabel": "導演",
+    "directorPlaceholder": "例如：Christopher Nolan",
+    "yearLabel": "上映年份",
+    "runtimeLabel": "片長（分鐘）",
+    "runtimePlaceholder": "例如：148",
+    "genreLabel": "類型",
+    "genrePlaceholder": "例如：科幻、動作、劇情",
+    "descriptionLabel": "簡介",
+    "descriptionPlaceholder": "寫一段電影的簡短摘要…",
+    "submit": "儲存變更",
+    "submitting": "儲存中…",
+    "errorGeneric": "更新電影失敗"
+  },
+  "reviews": {
+    "title": "評論",
+    "titleWithCount": "評論（{count}）",
+    "writeReview": "撰寫評論",
+    "yourRating": "你的評分",
+    "ratingLabel5": "超棒！",
+    "ratingLabel4": "很好",
+    "ratingLabel3": "普通",
+    "ratingLabel2": "較弱",
+    "ratingLabel1": "不好",
+    "yourReview": "你的評論",
+    "yourReviewLabel": "你的評論",
+    "reviewPlaceholder": "分享你對這部電影的看法…",
+    "characters": "字元",
+    "publish": "發佈評論",
+    "publishing": "發佈中…",
+    "noReviews": "尚無評論。成為第一個評論這部電影的人吧！",
+    "loginToReview": "以新增評論",
+    "errorGeneric": "發佈評論失敗"
+  },
+  "delete": {
+    "confirmTitle": "確認刪除",
+    "confirmMovie": "確定要刪除此電影嗎？所有相關評論也會一併刪除。",
+    "confirmReview": "確定要刪除此評論嗎？",
+    "deleting": "刪除中…",
+    "delete": "是的，刪除",
+    "errorGeneric": "刪除失敗"
+  }
+}

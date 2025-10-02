@@ -10,6 +10,15 @@ import Movie from "@/lib/models/Movie";
 import EditMovieForm from "@/components/EditMovieForm";
 import type { Movie as MovieType } from "@/types";
 
+import { cookies } from "next/headers";
+import {
+  normalizeLocale,
+  defaultLocale,
+  loadMessages,
+  createTranslator,
+  type Locale,
+} from "@/lib/i18n";
+
 export const dynamic = "force-dynamic";
 
 export default async function EditMoviePage({
@@ -20,24 +29,23 @@ export default async function EditMoviePage({
   const { userId } = await auth();
   const { id } = await params;
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
+  if (!userId) redirect("/sign-in");
+
+  // i18n (server)
+  const cookieStore = await cookies();
+  const raw = cookieStore.get("lang")?.value;
+  const locale: Locale = normalizeLocale(raw) ?? defaultLocale;
+  const messages = await loadMessages(locale);
+  const t = createTranslator(messages);
 
   let movie: MovieType | null = null;
 
   try {
     await connectDB();
     const rawMovie = await Movie.findById(id);
+    if (!rawMovie) notFound();
 
-    if (!rawMovie) {
-      notFound();
-    }
-
-    // Sjekk eierskap
-    if (rawMovie.createdBy !== userId) {
-      redirect("/");
-    }
+    if (rawMovie.createdBy !== userId) redirect("/");
 
     movie = {
       _id: rawMovie._id.toString(),
@@ -60,14 +68,14 @@ export default async function EditMoviePage({
     <div className="max-w-2xl mx-auto">
       <div className="mb-8">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-[#06b6d4] to-[#ec4899] bg-clip-text text-transparent mb-2">
-          Rediger film
+          {t("movieForm.editTitle")}
         </h1>
         <p className="text-gray-400 text-lg">
-          Oppdater informasjonen om {movie.title}
+          {t("movieForm.editSubtitle", { title: movie!.title })}
         </p>
       </div>
 
-      <EditMovieForm movie={movie} />
+      <EditMovieForm movie={movie!} />
     </div>
   );
 }
@@ -79,5 +87,5 @@ export default async function EditMoviePage({
  * - Owner verification (only owners can edit)
  * - Data transformation for the edit form
  * - Error handling and not found states
- * - Integration with EditMovieForm component 
+ * - Integration with EditMovieForm component
  */

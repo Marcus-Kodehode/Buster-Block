@@ -1,0 +1,106 @@
+{
+  "common": {
+    "cancel": "Ghairi",
+    "tagline": "Chunguza na shiriki maoni yako kuhusu filamu"
+  },
+  "nav": {
+    "signIn": "Ingia",
+    "signUp": "Jiandikishe"
+  },
+  "home": {
+    "title": "Mapitio ya Filamu",
+    "addMovie": "Ongeza Filamu",
+    "noMovies": "Bado hakuna filamu zilizoongezwa",
+    "beFirst": "Kuwa wa kwanza kuongeza filamu →",
+    "noMatches": "Hakuna filamu zinazolingana na vichujio vyako",
+    "showing": "Inaonyesha {count} kati ya {total} filamu"
+  },
+  "filters": {
+    "searchPlaceholder": "Tafuta kwa jina, mwongozaji au aina...",
+    "filtersButton": "Vichujio na upangaji",
+    "reset": "Weka upya",
+    "genre": "Aina",
+    "allGenres": "Aina zote",
+    "sortBy": "Panga kwa",
+    "yearNewest": "Mwaka wa kutolewa (mpya zaidi)",
+    "yearOldest": "Mwaka wa kutolewa (wa zamani zaidi)",
+    "titleAsc": "Jina (A–Z)",
+    "titleDesc": "Jina (Z–A)",
+    "addedLast": "Iliyoongezwa hivi karibuni",
+    "addedFirst": "Iliyoongezwa mwanzo",
+    "yearRange": "Mwaka wa kutolewa: {min} - {max}"
+  },
+  "movie": {
+    "backToAll": "Rudi kwenye filamu zote",
+    "directedBy": "Imeongozwa na",
+    "minutes": "dakika",
+    "edit": "Hariri filamu",
+    "delete": "Futa"
+  },
+  "movieForm": {
+    "addTitle": "Ongeza filamu mpya",
+    "addSubtitle": "Shiriki filamu unayotaka wengine waigundue",
+    "editTitle": "Hariri filamu",
+    "editSubtitle": "Sasisha taarifa kuhusu {title}",
+
+    "titleLabel": "Jina",
+    "titlePlaceholder": "mf. Inception",
+    "directorLabel": "Mwongozaji",
+    "directorPlaceholder": "mf. Christopher Nolan",
+    "yearLabel": "Mwaka wa kutolewa",
+    "runtimeLabel": "Muda wa kuonesha (dakika)",
+    "runtimePlaceholder": "mf. 148",
+    "genreLabel": "Aina",
+    "genrePlaceholder": "mf. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Maelezo",
+    "descriptionPlaceholder": "Andika muhtasari mfupi wa filamu...",
+    "characters": "wahusika",
+    "submit": "Ongeza filamu",
+    "submitting": "Inaongezwa...",
+    "errorGeneric": "Imeshindwa kuongeza filamu"
+  },
+  "editForm": {
+    "titleLabel": "Jina",
+    "titlePlaceholder": "mf. Inception",
+    "directorLabel": "Mwongozaji",
+    "directorPlaceholder": "mf. Christopher Nolan",
+    "yearLabel": "Mwaka wa kutolewa",
+    "runtimeLabel": "Muda wa kuonesha (dakika)",
+    "runtimePlaceholder": "mf. 148",
+    "genreLabel": "Aina",
+    "genrePlaceholder": "mf. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Maelezo",
+    "descriptionPlaceholder": "Andika muhtasari mfupi wa filamu...",
+    "submit": "Hifadhi mabadiliko",
+    "submitting": "Inahifadhiwa...",
+    "errorGeneric": "Imeshindwa kusasisha filamu"
+  },
+  "reviews": {
+    "title": "Mapitio",
+    "titleWithCount": "Mapitio ({count})",
+    "writeReview": "Andika mapitio",
+    "yourRating": "Kiwango chako",
+    "ratingLabel5": "Ajabu!",
+    "ratingLabel4": "Nzuri sana",
+    "ratingLabel3": "Sawa",
+    "ratingLabel2": "Dhaifu",
+    "ratingLabel1": "Mbaya",
+    "yourReview": "Mapitio yako",
+    "yourReviewLabel": "Mapitio yako",
+    "reviewPlaceholder": "Shiriki mawazo yako kuhusu filamu...",
+    "characters": "wahusika",
+    "publish": "Chapisha mapitio",
+    "publishing": "Inachapishwa...",
+    "noReviews": "Bado hakuna mapitio. Kuwa wa kwanza kutoa mapitio ya filamu hii!",
+    "loginToReview": "kuongeza mapitio",
+    "errorGeneric": "Imeshindwa kuchapisha mapitio"
+  },
+  "delete": {
+    "confirmTitle": "Thibitisha kufuta",
+    "confirmMovie": "Una uhakika unataka kufuta filamu hii? Mapitio yote yanayohusiana pia yatafutwa.",
+    "confirmReview": "Una uhakika unataka kufuta mapitio haya?",
+    "deleting": "Inafuta...",
+    "delete": "Ndiyo, futa",
+    "errorGeneric": "Imeshindwa kufuta"
+  }
+}

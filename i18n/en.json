@@ -1,16 +1,19 @@
 {
   "common": {
-    "appName": "Buster Block",
+    "cancel": "Cancel",
     "tagline": "Explore and share your opinions about movies"
   },
-  "nav": { "signIn": "Sign In", "signUp": "Sign Up" },
+  "nav": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
   "home": {
     "title": "Movie Reviews",
     "addMovie": "Add Movie",
     "noMovies": "No movies added yet",
-    "beFirst": "Be the first to add a movie",
-    "showing": "Showing {count} of {total} movies",
-    "noMatches": "No movies match your filters"
+    "beFirst": "Be the first to add a movie →",
+    "noMatches": "No movies match your filters",
+    "showing": "Showing {count} of {total} movies"
   },
   "filters": {
     "searchPlaceholder": "Search for title, director or genre...",
@@ -21,16 +24,83 @@
     "sortBy": "Sort by",
     "yearNewest": "Release year (newest)",
     "yearOldest": "Release year (oldest)",
-    "titleAsc": "Title (A-Z)",
-    "titleDesc": "Title (Z-A)",
+    "titleAsc": "Title (A–Z)",
+    "titleDesc": "Title (Z–A)",
     "addedLast": "Last added",
     "addedFirst": "First added",
     "yearRange": "Release year: {min} - {max}"
   },
   "movie": {
+    "backToAll": "Back to all movies",
     "directedBy": "Directed by",
     "minutes": "min",
     "edit": "Edit movie",
     "delete": "Delete"
+  },
+  "movieForm": {
+    "addTitle": "Add new movie",
+    "addSubtitle": "Share a movie you want others to discover",
+    "editTitle": "Edit movie",
+    "editSubtitle": "Update information about {title}",
+
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. Inception",
+    "directorLabel": "Director",
+    "directorPlaceholder": "e.g. Christopher Nolan",
+    "yearLabel": "Release year",
+    "runtimeLabel": "Runtime (minutes)",
+    "runtimePlaceholder": "e.g. 148",
+    "genreLabel": "Genre",
+    "genrePlaceholder": "e.g. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Write a short summary of the movie...",
+    "characters": "characters",
+    "submit": "Add movie",
+    "submitting": "Adding...",
+    "errorGeneric": "Failed to create movie"
+  },
+  "editForm": {
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. Inception",
+    "directorLabel": "Director",
+    "directorPlaceholder": "e.g. Christopher Nolan",
+    "yearLabel": "Release year",
+    "runtimeLabel": "Runtime (minutes)",
+    "runtimePlaceholder": "e.g. 148",
+    "genreLabel": "Genre",
+    "genrePlaceholder": "e.g. Sci-Fi, Action, Drama",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Write a short summary of the movie...",
+    "submit": "Save changes",
+    "submitting": "Saving...",
+    "errorGeneric": "Failed to update movie"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "titleWithCount": "Reviews ({count})",
+    "writeReview": "Write a review",
+    "yourRating": "Your rating",
+    "ratingLabel5": "Amazing!",
+    "ratingLabel4": "Very good",
+    "ratingLabel3": "Okay",
+    "ratingLabel2": "Weak",
+    "ratingLabel1": "Bad",
+    "yourReview": "Your review",
+    "yourReviewLabel": "Your review",
+    "reviewPlaceholder": "Share your thoughts about the movie...",
+    "characters": "characters",
+    "publish": "Publish review",
+    "publishing": "Publishing...",
+    "noReviews": "No reviews yet. Be the first to review this movie!",
+    "loginToReview": "to add a review",
+    "errorGeneric": "Failed to post review"
+  },
+  "delete": {
+    "confirmTitle": "Confirm deletion",
+    "confirmMovie": "Are you sure you want to delete this movie? All associated reviews will also be deleted.",
+    "confirmReview": "Are you sure you want to delete this review?",
+    "deleting": "Deleting...",
+    "delete": "Yes, delete",
+    "errorGeneric": "Failed to delete"
   }
 }

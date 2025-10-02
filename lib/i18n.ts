@@ -1,6 +1,6 @@
 // /lib/i18n.ts
 export const locales = ["en", "no", "es-MX", "sw", "tr", "zh-TW"] as const;
-export type Locale = typeof locales[number]; // "en" | "no" | "es-MX" | "sw" | "tr" | "zh-TW"
+export type Locale = (typeof locales)[number]; // "en" | "no" | "es-MX" | "sw" | "tr" | "zh-TW"
 export const defaultLocale: Locale = "en";
 
 export function normalizeLocale(input?: string): Locale {
@@ -23,6 +23,14 @@ export async function loadMessages(locale: Locale): Promise<Messages> {
   switch (locale) {
     case "no":
       return (await import("../i18n/no.json")).default as Messages;
+    case "es-MX":
+      return (await import("../i18n/es-MX.json")).default as Messages;
+    case "sw":
+      return (await import("../i18n/sw.json")).default as Messages;
+    case "tr":
+      return (await import("../i18n/tr.json")).default as Messages;
+    case "zh-TW":
+      return (await import("../i18n/zh-TW.json")).default as Messages;
     case "en":
     default:
       return (await import("../i18n/en.json")).default as Messages;
