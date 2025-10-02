@@ -23,7 +23,7 @@ export default async function MoviePage({
 
   try {
     await connectDB();
-    const rawMovie = (await Movie.findById(id).lean().exec()) as any;
+    const rawMovie = await Movie.findById(id);
 
     if (!rawMovie) {
       notFound();
@@ -40,10 +40,9 @@ export default async function MoviePage({
       updatedAt: rawMovie.updatedAt.toISOString(),
     };
 
-    const rawReviews = (await Review.find({ movieId: id })
-      .sort({ createdAt: -1 })
-      .lean()
-      .exec()) as any[];
+    const rawReviews = await Review.find({ movieId: id }).sort({
+      createdAt: -1,
+    });
 
     reviews = rawReviews.map((review) => ({
       _id: review._id.toString(),

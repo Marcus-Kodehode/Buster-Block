@@ -3,29 +3,29 @@ import { auth } from "@clerk/nextjs/server";
 import MovieCard from "@/components/MovieCard";
 import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
+import type { Movie as MovieType } from "@/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { userId } = await auth();
 
-  let movies: any[] = [];
+  let movies: MovieType[] = [];
 
-try {
-  await connectDB();
-  const rawMovies = await Movie.find({}).sort({ createdAt: -1 }).lean().exec();
-  
-  movies = (rawMovies as any[]).map((movie: any) => ({
-    _id: movie._id.toString(),
-    title: movie.title,
-    director: movie.director,
-    releaseYear: movie.releaseYear,
-    genre: movie.genre,
-    createdBy: movie.createdBy,
-    createdAt: movie.createdAt.toISOString(),
-    updatedAt: movie.updatedAt.toISOString(),
-  }));
-}
+  try {
+    await connectDB();
+    const rawMovies = await Movie.find({}).sort({ createdAt: -1 });
+
+    movies = rawMovies.map((movie) => ({
+      _id: movie._id.toString(),
+      title: movie.title,
+      director: movie.director,
+      releaseYear: movie.releaseYear,
+      genre: movie.genre,
+      createdBy: movie.createdBy,
+      createdAt: movie.createdAt.toISOString(),
+      updatedAt: movie.updatedAt.toISOString(),
+    }));
   } catch (error) {
     console.error("Error fetching movies:", error);
   }
