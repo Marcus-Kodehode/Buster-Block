@@ -1,12 +1,12 @@
 // types/index.ts
-
-// Frontend-vennlige typer (uten Mongoose-spesifikke ting)
 export type Movie = {
   _id: string;
   title: string;
   director: string;
   releaseYear: number;
   genre: string;
+  description?: string; // NY
+  runtime?: number; // NY
   createdBy: string;
   createdAt: string;
   updatedAt: string;
@@ -23,7 +23,6 @@ export type Review = {
   updatedAt: string;
 };
 
-// API response types
 export type ApiResponse<T> =
   | {
       success: true;

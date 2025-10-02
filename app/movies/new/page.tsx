@@ -11,10 +11,14 @@ export default async function NewMoviePage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-2">Legg til ny film</h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-8">
-        Del en film du vil at andre skal oppdage
-      </p>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent mb-2">
+          Legg til ny film
+        </h1>
+        <p className="text-gray-400 text-lg">
+          Del en film du vil at andre skal oppdage
+        </p>
+      </div>
 
       <MovieForm />
     </div>

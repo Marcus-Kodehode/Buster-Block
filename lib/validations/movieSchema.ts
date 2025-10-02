@@ -24,6 +24,17 @@ export const createMovieSchema = z.object({
     .min(1, "Genre is required")
     .max(50, "Genre cannot be more than 50 characters")
     .trim(),
+  description: z
+    .string()
+    .max(500, "Description cannot be more than 500 characters")
+    .trim()
+    .optional(),
+  runtime: z
+    .number()
+    .int("Runtime must be an integer")
+    .min(1, "Runtime must be at least 1 minute")
+    .max(1000, "Runtime cannot exceed 1000 minutes")
+    .optional(),
 });
 
 export const updateMovieSchema = createMovieSchema.partial();

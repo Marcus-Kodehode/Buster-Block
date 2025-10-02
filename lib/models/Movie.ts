@@ -1,10 +1,12 @@
-import { Schema, model, models, Document } from 'mongoose';
+import { Schema, model, models, Document } from "mongoose";
 
 export interface IMovie extends Document {
   title: string;
   director: string;
   releaseYear: number;
   genre: string;
+  description?: string; // NY
+  runtime?: number; // NY
   createdBy: string;
   createdAt: Date;
   updatedAt: Date;
@@ -38,6 +40,16 @@ const MovieSchema = new Schema<IMovie>(
       required: [true, "Genre is required"],
       trim: true,
       maxlength: [50, "Genre cannot be more than 50 characters"],
+    },
+    description: {
+      type: String,
+      trim: true,
+      maxlength: [500, "Description cannot be more than 500 characters"],
+    },
+    runtime: {
+      type: Number,
+      min: [1, "Runtime must be at least 1 minute"],
+      max: [1000, "Runtime cannot exceed 1000 minutes"],
     },
     createdBy: {
       type: String,
