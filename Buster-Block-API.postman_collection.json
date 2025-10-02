@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "e43afcf6-b548-4be2-8c02-d0265441f129",
+		"name": "Movie Review API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48964257",
+		"_collection_link": "https://marcus-kodehode-5411758.postman.co/workspace/Marcus's-Workspace~28e1015b-b3a0-4e6f-8dcb-7c7419571df6/collection/48964257-e43afcf6-b548-4be2-8c02-d0265441f129?action=share&source=collection_link&creator=48964257"
+	},
+	"item": [
+		{
+			"name": "Get all movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://buster-block.vercel.app/api/movies",
+					"protocol": "https",
+					"host": [
+						"buster-block",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post new movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://buster-block.vercel.app/api/movies",
+					"protocol": "https",
+					"host": [
+						"buster-block",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "buster-block.vercel.app/api/movies/:id",
+					"host": [
+						"buster-block",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"movies",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "buster-block.vercel.app/api/movies/:id/reviews",
+					"host": [
+						"buster-block",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"movies",
+						":id",
+						"reviews"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "buster-block.vercel.app/api/movies/:id/reviews",
+					"host": [
+						"buster-block",
+						"vercel",
+						"app"
+					],
+					"path": [
+						"api",
+						"movies",
+						":id",
+						"reviews"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

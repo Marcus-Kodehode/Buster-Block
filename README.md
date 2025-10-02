@@ -1,36 +1,234 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <p>
+    <img src="/public/images/personal-logo.png" alt="Personal Logo" width="150" />
+  </p>
+  <p>
+    <img src="/public/images/buster-block-logo.png" alt="Buster Block Logo" width="150" />
+  </p>
+  
+  # Buster Block
+  
+  > A full-stack movie review platform where film enthusiasts share their passion – Rate, review, and discover cinema!
+  
+  [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg)](https://nextjs.org)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6.svg)](https://www.typescriptlang.org)
+  [![MongoDB](https://img.shields.io/badge/MongoDB-7-47a248.svg)](https://www.mongodb.com)
+  [![Clerk](https://img.shields.io/badge/Clerk-Auth-6c47ff.svg)](https://clerk.com)
+  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+</div>
+
+## Features
+
+- 🎬 Full CRUD operations for movies
+- ⭐ Star-based rating system (1-5 stars)
+- ✍️ Write and read detailed reviews
+- 🔒 Secure authentication with Clerk
+- 📝 Input validation with Zod schemas
+- 🌐 RESTful API with proper status codes
+- 📱 Fully responsive design
+- 🎨 Dark mode optimized
+- 🚀 Deployed on Vercel
+
+## Screenshot
+
+<div align="center">
+  <img src="/public/images/buster-block-screenshot.png" alt="Buster Block Screenshot" width="900" />
+</div>
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/Marcus-Kodehode/Buster-Block.git
+cd Buster-Block
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+
+Create `.env.local` in the root directory:
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+MONGODB_URI=your_mongodb_connection_string
+```
+
+4. **Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. **Open your browser**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Built With
 
-## Learn More
+- **[Next.js](https://nextjs.org)** - React framework with App Router
+- **[React](https://react.dev)** - JavaScript library for building user interfaces
+- **[TypeScript](https://www.typescriptlang.org)** - Typed superset of JavaScript
+- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
+- **[MongoDB](https://www.mongodb.com)** - NoSQL database
+- **[Mongoose](https://mongoosejs.com)** - MongoDB object modeling
+- **[Clerk](https://clerk.com)** - Authentication and user management
+- **[Zod](https://zod.dev)** - TypeScript-first schema validation
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+buster-block/
+├── app/
+│   ├── api/
+│   │   └── movies/          # API routes
+│   │       ├── route.ts     # GET all, POST new
+│   │       └── [id]/
+│   │           ├── route.ts       # GET one, PUT update
+│   │           └── reviews/
+│   │               └── route.ts   # GET/POST reviews
+│   ├── (auth)/              # Authentication pages
+│   │   ├── sign-in/
+│   │   └── sign-up/
+│   ├── movies/
+│   │   ├── new/            # Add movie page
+│   │   └── [id]/           # Movie details page
+│   ├── layout.tsx          # Root layout
+│   ├── page.tsx            # Homepage
+│   └── globals.css         # Global styles
+├── components/
+│   ├── MovieCard.tsx       # Movie card component
+│   ├── MovieForm.tsx       # Add/edit movie form
+│   ├── ReviewForm.tsx      # Add review form
+│   └── ReviewList.tsx      # Reviews display component
+├── lib/
+│   ├── mongodb.ts          # Database connection
+│   ├── models/
+│   │   ├── Movie.ts        # Movie schema
+│   │   └── Review.ts       # Review schema
+│   └── validations/
+│       ├── movieSchema.ts   # Movie validation
+│       └── reviewSchema.ts  # Review validation
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Browser Support
 
-## Deploy on Vercel
+- Chrome/Chromium 88+
+- Firefox 85+
+- Safari 14+
+- Edge 88+
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Building for Production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+The optimized build will be available in the `.next/` directory.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  <i>"Not all those who wander are lost, but in this game, the highest card wins!"</i>
+  <br>
+  <sub>Built with ❤️ by Marcus-Kodehode</sub>
+</div>
+│   └── ReviewList.tsx      # Display reviews
+├── lib/
+│   ├── models/
+│   │   ├── Movie.ts        # Movie schema
+│   │   └── Review.ts       # Review schema
+│   ├── validations/
+│   │   ├── movieSchema.ts  # Movie validation
+│   │   └── reviewSchema.ts # Review validation
+│   └── mongodb.ts          # Database connection
+├── types/
+│   └── index.ts            # TypeScript types
+└── middleware.ts           # Clerk middleware
+API Documentation
+Movies Endpoints
+GET /api/movies
+Fetch all movies.
+Response: 200 OK
+json{
+  "success": true,
+  "data": [...]
+}
+POST /api/movies
+Create a new movie (requires authentication).
+Request Body:
+json{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "releaseYear": 2010,
+  "genre": "Sci-Fi"
+}
+Response: 201 Created | 401 Unauthorized
+GET /api/movies/:id
+Fetch a single movie by ID.
+Response: 200 OK | 404 Not Found
+PUT /api/movies/:id
+Update a movie (requires authentication + ownership).
+Response: 200 OK | 403 Forbidden
+Reviews Endpoints
+GET /api/movies/:id/reviews
+Fetch all reviews for a movie.
+Response: 200 OK
+POST /api/movies/:id/reviews
+Create a review (requires authentication).
+Request Body:
+json{
+  "reviewText": "Amazing movie with great visuals!",
+  "rating": 5
+}
+Response: 201 Created | 409 Conflict
+Testing with Postman
+A Postman collection is included: Buster-Block-API.postman_collection.json
+To import:
+
+Open Postman
+Click "Import"
+Select the JSON file
+Test all endpoints
+
+Deployment
+Deployed on Vercel with automatic CI/CD from GitHub.
+Environment Variables:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY
+MONGODB_URI
+
+Building for Production
+bashnpm run build
+npm start
+The optimized build will be available in the .next/ directory.
+Browser Support
+
+Chrome/Chromium 88+
+Firefox 85+
+Safari 14+
+Edge 88+
+
+Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+<div align="center">
+  <i>"All we have to decide is what to do with the films that are given to us."</i>
+  <br>
+  <sub>Built with ❤️ by Marcus-Kodehode</sub>
+</div>
+```
