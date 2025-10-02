@@ -1,15 +1,21 @@
+/* ===== Base / Tailwind ===== */
 @import "tailwindcss";
 
+/* ===== Design tokens ===== */
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
+
   --card: #1a1a1a;
   --card-hover: #252525;
+
   --primary: #6c47ff;
   --primary-hover: #5639cc;
+
   --accent-cyan: #06b6d4;
   --accent-pink: #ec4899;
   --accent-orange: #f59e0b;
+
   --border: #2a2a2a;
   --input: #1f1f1f;
   --muted: #6b7280;
@@ -22,6 +28,7 @@
     sans-serif;
 }
 
+/* ===== Page background / base typography ===== */
 body {
   background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
   background-attachment: fixed;
@@ -31,14 +38,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Animated gradient background */
+/* Animated gradient backdrop (subtle) */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: radial-gradient(
       circle at 20% 50%,
       rgba(108, 71, 255, 0.1) 0%,
@@ -69,25 +73,22 @@ body::before {
   }
 }
 
-/* Custom scrollbar */
+/* ===== Scrollbar ===== */
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
-
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #6c47ff 0%, #5639cc 100%);
   border-radius: 8px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #7c57ff 0%, #6649dc 100%);
 }
 
-/* Smooth transitions */
+/* ===== Global transitions (kept) ===== */
 * {
   transition-property: color, background-color, border-color, box-shadow,
     transform;
@@ -95,21 +96,511 @@ body::before {
   transition-duration: 200ms;
 }
 
-/* Focus styles */
+/* ===== Focus ===== */
 *:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Glow effect utility */
+/* ===== Small glow utilities ===== */
 .glow {
   box-shadow: 0 0 20px rgba(108, 71, 255, 0.3);
 }
-
 .glow-cyan {
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
 }
-
 .glow-pink {
   box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+}
+
+/* =======================================================================
+   GENRE-THEMING FOR MOVIE CARDS
+   - TSX: bruk className="movie-card ..." + <div class="overlay" /> + <div class="accent-line" />
+          og wrapp innhold i <div class="content">...</div>
+   - data-genre settes til normalisert slug (f.eks. "horror", "sci-fi")
+   ======================================================================= */
+
+/* Base card */
+.movie-card {
+  position: relative; /* lager stacking context */
+  border: 1px solid var(--card-border, var(--border));
+  background: linear-gradient(
+    135deg,
+    var(--card-bg-from, rgba(17, 17, 17, 0.8)),
+    var(--card-bg-to, rgba(17, 17, 17, 0.3))
+  );
+  box-shadow: var(--card-shadow, 0 0 0 rgba(0, 0, 0, 0));
+  border-radius: 1rem; /* matcher rounded-2xl i Tailwind */
+}
+
+/* Hover depth/border */
+.movie-card:hover {
+  border-color: var(--card-border-hover, var(--primary));
+  box-shadow: var(--card-shadow-hover, 0 20px 60px rgba(108, 71, 255, 0.25));
+}
+
+/* Layering */
+.movie-card .overlay,
+.movie-card .accent-line {
+  z-index: 0;
+}
+.movie-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--overlay-from, rgba(0, 0, 0, 0)),
+    var(--overlay-via, rgba(0, 0, 0, 0)),
+    var(--overlay-to, rgba(0, 0, 0, 0))
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 300ms ease;
+}
+.movie-card:hover .overlay {
+  opacity: 1;
+}
+
+.movie-card .accent-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-from, var(--primary)),
+    var(--accent-via, var(--accent-cyan)),
+    var(--accent-to, var(--accent-pink))
+  );
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.movie-card .content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon wrap + icon color */
+.movie-card .icon-wrap {
+  background: linear-gradient(
+    135deg,
+    var(--iconwrap-from, rgba(108, 71, 255, 0.2)),
+    var(--iconwrap-to, rgba(108, 71, 255, 0.05))
+  );
+  border-radius: 0.75rem;
+}
+.movie-card .icon {
+  color: var(--icon-color, var(--primary));
+}
+
+/* Title gradient ONLY on hover (unngår “rosa bar”) */
+.movie-card:hover .title {
+  background-image: linear-gradient(
+    90deg,
+    var(--title-from, var(--primary)),
+    var(--title-to, var(--accent-cyan))
+  );
+}
+
+/* Badges */
+.movie-card .badge {
+  background: linear-gradient(
+    90deg,
+    var(--badge-from, rgba(31, 31, 31, 0.8)),
+    var(--badge-to, rgba(31, 31, 31, 0.4))
+  );
+  border: 1px solid var(--badge-border, rgba(255, 255, 255, 0.08));
+  color: var(--badge-text, #d1d5db);
+  border-radius: 9999px;
+}
+.movie-card:hover .badge {
+  border-color: var(--badge-border-hover, var(--primary));
+}
+
+/* Runtime badge */
+.movie-card .runtime-badge {
+  background: linear-gradient(
+    90deg,
+    var(--rt-from, rgba(236, 72, 153, 0.2)),
+    var(--rt-to, rgba(245, 158, 11, 0.1))
+  );
+  border: 1px solid var(--rt-border, rgba(236, 72, 153, 0.5));
+  color: #d1d5db;
+  border-radius: 9999px;
+}
+
+/* ---------- DEFAULT (fallback) ---------- */
+.movie-card[data-genre="default"] {
+  --card-border: #2a2a2a;
+  --card-border-hover: var(--primary);
+  --card-bg-from: rgba(17, 17, 17, 0.8);
+  --card-bg-to: rgba(17, 17, 17, 0.3);
+
+  --overlay-from: rgba(108, 71, 255, 0.1);
+  --overlay-via: rgba(6, 182, 212, 0.05);
+  --overlay-to: rgba(236, 72, 153, 0.1);
+
+  --accent-from: var(--primary);
+  --accent-via: var(--accent-cyan);
+  --accent-to: var(--accent-pink);
+
+  --iconwrap-from: rgba(108, 71, 255, 0.2);
+  --iconwrap-to: rgba(108, 71, 255, 0.05);
+  --icon-color: var(--primary);
+
+  --title-from: var(--primary);
+  --title-to: var(--accent-cyan);
+
+  --badge-from: rgba(31, 31, 31, 0.8);
+  --badge-to: rgba(31, 31, 31, 0.4);
+  --badge-border: rgba(107, 114, 128, 0.5);
+  --badge-border-hover: rgba(108, 71, 255, 0.5);
+
+  --rt-from: rgba(236, 72, 153, 0.2);
+  --rt-to: rgba(245, 158, 11, 0.1);
+  --rt-border: rgba(236, 72, 153, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(108, 71, 255, 0.3);
+}
+
+/* ---------- HORROR ---------- */
+.movie-card[data-genre="horror"] {
+  --card-border: rgba(127, 29, 29, 0.6);
+  --card-border-hover: rgba(239, 68, 68, 0.6);
+  --card-bg-from: rgba(3, 3, 3, 0.95);
+  --card-bg-to: rgba(17, 17, 17, 0.7);
+
+  --overlay-from: rgba(220, 38, 38, 0.1);
+  --overlay-via: rgba(244, 63, 94, 0.1);
+  --overlay-to: rgba(0, 0, 0, 0.2);
+
+  --accent-from: #dc2626;
+  --accent-via: #f43f5e;
+  --accent-to: #b91c1c;
+
+  --iconwrap-from: rgba(220, 38, 38, 0.25);
+  --iconwrap-to: rgba(127, 29, 29, 0.1);
+  --icon-color: #fca5a5;
+
+  --title-from: #f87171;
+  --title-to: #fda4af;
+
+  --badge-from: rgba(127, 29, 29, 0.6);
+  --badge-to: rgba(153, 27, 27, 0.3);
+  --badge-border: rgba(239, 68, 68, 0.4);
+  --badge-border-hover: rgba(248, 113, 113, 0.6);
+
+  --rt-from: rgba(153, 27, 27, 0.4);
+  --rt-to: rgba(185, 28, 28, 0.2);
+  --rt-border: rgba(239, 68, 68, 0.4);
+
+  --card-shadow-hover: 0 20px 60px rgba(239, 68, 68, 0.3);
+}
+
+/* ---------- DRAMA ---------- */
+.movie-card[data-genre="drama"] {
+  --card-border: rgba(124, 45, 18, 0.4);
+  --card-border-hover: rgba(245, 158, 11, 0.5);
+  --card-bg-from: #1a140f;
+  --card-bg-to: rgba(17, 17, 17, 0.7);
+
+  --overlay-from: rgba(245, 158, 11, 0.1);
+  --overlay-via: rgba(251, 146, 60, 0.1);
+  --overlay-to: rgba(244, 114, 182, 0.1);
+
+  --accent-from: #f59e0b;
+  --accent-via: #fb923c;
+  --accent-to: #fda4af;
+
+  --iconwrap-from: rgba(245, 158, 11, 0.25);
+  --iconwrap-to: rgba(251, 146, 60, 0.1);
+  --icon-color: #fde68a;
+
+  --title-from: #fde68a;
+  --title-to: #fed7aa;
+
+  --badge-from: rgba(120, 53, 15, 0.5);
+  --badge-to: rgba(154, 52, 18, 0.3);
+  --badge-border: rgba(245, 158, 11, 0.4);
+  --badge-border-hover: rgba(251, 191, 36, 0.6);
+
+  --rt-from: rgba(154, 52, 18, 0.4);
+  --rt-to: rgba(217, 119, 6, 0.2);
+  --rt-border: rgba(251, 146, 60, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(245, 158, 11, 0.3);
+}
+
+/* ---------- SCI-FI ---------- */
+.movie-card[data-genre="sci-fi"] {
+  --card-border: rgba(22, 78, 99, 0.5);
+  --card-border-hover: rgba(34, 211, 238, 0.6);
+  --card-bg-from: #031018;
+  --card-bg-to: #071b2a;
+
+  --overlay-from: rgba(6, 182, 212, 0.1);
+  --overlay-via: rgba(59, 130, 246, 0.1);
+  --overlay-to: rgba(217, 70, 239, 0.1);
+
+  --accent-from: #06b6d4;
+  --accent-via: #3b82f6;
+  --accent-to: #d946ef;
+
+  --iconwrap-from: rgba(6, 182, 212, 0.25);
+  --iconwrap-to: rgba(59, 130, 246, 0.1);
+  --icon-color: #a5f3fc;
+
+  --title-from: #a5f3fc;
+  --title-to: #93c5fd;
+
+  --badge-from: rgba(8, 51, 68, 0.6);
+  --badge-to: rgba(12, 74, 110, 0.3);
+  --badge-border: rgba(34, 211, 238, 0.5);
+  --badge-border-hover: rgba(165, 243, 252, 0.7);
+
+  --rt-from: rgba(162, 28, 175, 0.4);
+  --rt-to: rgba(30, 64, 175, 0.2);
+  --rt-border: rgba(217, 70, 239, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(6, 182, 212, 0.3);
+}
+
+/* ---------- ACTION ---------- */
+.movie-card[data-genre="action"] {
+  --card-border: rgba(12, 74, 110, 0.5);
+  --card-border-hover: rgba(56, 189, 248, 0.6);
+  --card-bg-from: #0a1018;
+  --card-bg-to: #0c151f;
+
+  --overlay-from: rgba(56, 189, 248, 0.1);
+  --overlay-via: rgba(99, 102, 241, 0.1);
+  --overlay-to: rgba(16, 185, 129, 0.1);
+
+  --accent-from: #38bdf8;
+  --accent-via: #6366f1;
+  --accent-to: #10b981;
+
+  --iconwrap-from: rgba(56, 189, 248, 0.25);
+  --iconwrap-to: rgba(99, 102, 241, 0.1);
+  --icon-color: #7dd3fc;
+
+  --title-from: #7dd3fc;
+  --title-to: #a5b4fc;
+
+  --badge-from: rgba(12, 74, 110, 0.6);
+  --badge-to: rgba(30, 58, 138, 0.3);
+  --badge-border: rgba(56, 189, 248, 0.5);
+  --badge-border-hover: rgba(125, 211, 252, 0.7);
+
+  --rt-from: rgba(4, 120, 87, 0.4);
+  --rt-to: rgba(49, 46, 129, 0.2);
+  --rt-border: rgba(16, 185, 129, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(56, 189, 248, 0.3);
+}
+
+/* ---------- ROMANCE ---------- */
+.movie-card[data-genre="romance"] {
+  --card-border: rgba(131, 24, 67, 0.5);
+  --card-border-hover: rgba(236, 72, 153, 0.6);
+  --card-bg-from: #1b0f14;
+  --card-bg-to: #180e12;
+
+  --overlay-from: rgba(236, 72, 153, 0.1);
+  --overlay-via: rgba(244, 63, 94, 0.1);
+  --overlay-to: rgba(217, 70, 239, 0.1);
+
+  --accent-from: #ec4899;
+  --accent-via: #f43f5e;
+  --accent-to: #d946ef;
+
+  --iconwrap-from: rgba(236, 72, 153, 0.25);
+  --iconwrap-to: rgba(244, 63, 94, 0.1);
+  --icon-color: #f9a8d4;
+
+  --title-from: #f9a8d4;
+  --title-to: #fecdd3;
+
+  --badge-from: rgba(131, 24, 67, 0.6);
+  --badge-to: rgba(76, 5, 25, 0.3);
+  --badge-border: rgba(236, 72, 153, 0.5);
+  --badge-border-hover: rgba(244, 114, 182, 0.7);
+
+  --rt-from: rgba(190, 24, 93, 0.4);
+  --rt-to: rgba(136, 19, 55, 0.2);
+  --rt-border: rgba(244, 63, 94, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(236, 72, 153, 0.3);
+}
+
+/* ---------- THRILLER ---------- */
+.movie-card[data-genre="thriller"] {
+  --card-border: rgba(88, 28, 135, 0.5);
+  --card-border-hover: rgba(168, 85, 247, 0.6);
+  --card-bg-from: #0f0a14;
+  --card-bg-to: #0d0a13;
+
+  --overlay-from: rgba(168, 85, 247, 0.1);
+  --overlay-via: rgba(217, 70, 239, 0.1);
+  --overlay-to: rgba(244, 63, 94, 0.1);
+
+  --accent-from: #a855f7;
+  --accent-via: #d946ef;
+  --accent-to: #f43f5e;
+
+  --iconwrap-from: rgba(168, 85, 247, 0.25);
+  --iconwrap-to: rgba(217, 70, 239, 0.1);
+  --icon-color: #e9d5ff;
+
+  --title-from: #d8b4fe;
+  --title-to: #f0abfc;
+
+  --badge-from: rgba(76, 29, 149, 0.6);
+  --badge-to: rgba(112, 26, 117, 0.3);
+  --badge-border: rgba(168, 85, 247, 0.5);
+  --badge-border-hover: rgba(233, 213, 255, 0.7);
+
+  --rt-from: rgba(244, 63, 94, 0.4);
+  --rt-to: rgba(109, 40, 217, 0.2);
+  --rt-border: rgba(244, 63, 94, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(168, 85, 247, 0.3);
+}
+
+/* ---------- ANIMATION ---------- */
+.movie-card[data-genre="animation"] {
+  --card-border: rgba(6, 95, 70, 0.5);
+  --card-border-hover: rgba(16, 185, 129, 0.6);
+  --card-bg-from: #07140f;
+  --card-bg-to: #0a1a12;
+
+  --overlay-from: rgba(16, 185, 129, 0.1);
+  --overlay-via: rgba(20, 184, 166, 0.1);
+  --overlay-to: rgba(8, 145, 178, 0.1);
+
+  --accent-from: #10b981;
+  --accent-via: #14b8a6;
+  --accent-to: #06b6d4;
+
+  --iconwrap-from: rgba(16, 185, 129, 0.25);
+  --iconwrap-to: rgba(20, 184, 166, 0.1);
+  --icon-color: #a7f3d0;
+
+  --title-from: #a7f3d0;
+  --title-to: #99f6e4;
+
+  --badge-from: rgba(6, 78, 59, 0.6);
+  --badge-to: rgba(19, 78, 74, 0.3);
+  --badge-border: rgba(16, 185, 129, 0.5);
+  --badge-border-hover: rgba(167, 243, 208, 0.7);
+
+  --rt-from: rgba(8, 145, 178, 0.4);
+  --rt-to: rgba(15, 118, 110, 0.2);
+  --rt-border: rgba(6, 182, 212, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(16, 185, 129, 0.3);
+}
+
+/* ---------- FANTASY ---------- */
+.movie-card[data-genre="fantasy"] {
+  --card-border: rgba(49, 46, 129, 0.5);
+  --card-border-hover: rgba(99, 102, 241, 0.6);
+  --card-bg-from: #0a0f1a;
+  --card-bg-to: #0c0f18;
+
+  --overlay-from: rgba(99, 102, 241, 0.1);
+  --overlay-via: rgba(139, 92, 246, 0.1);
+  --overlay-to: rgba(56, 189, 248, 0.1);
+
+  --accent-from: #6366f1;
+  --accent-via: #8b5cf6;
+  --accent-to: #38bdf8;
+
+  --iconwrap-from: rgba(99, 102, 241, 0.25);
+  --iconwrap-to: rgba(139, 92, 246, 0.1);
+  --icon-color: #c7d2fe;
+
+  --title-from: #c7d2fe;
+  --title-to: #ddd6fe;
+
+  --badge-from: rgba(49, 46, 129, 0.6);
+  --badge-to: rgba(76, 29, 149, 0.3);
+  --badge-border: rgba(99, 102, 241, 0.5);
+  --badge-border-hover: rgba(199, 210, 254, 0.7);
+
+  --rt-from: rgba(2, 132, 199, 0.4);
+  --rt-to: rgba(109, 40, 217, 0.2);
+  --rt-border: rgba(56, 189, 248, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(99, 102, 241, 0.3);
+}
+
+/* ---------- DOCUMENTARY ---------- */
+.movie-card[data-genre="documentary"] {
+  --card-border: rgba(63, 98, 18, 0.5);
+  --card-border-hover: rgba(163, 230, 53, 0.6);
+  --card-bg-from: #0d1407;
+  --card-bg-to: #0e1608;
+
+  --overlay-from: rgba(132, 204, 22, 0.1);
+  --overlay-via: rgba(34, 197, 94, 0.1);
+  --overlay-to: rgba(16, 185, 129, 0.1);
+
+  --accent-from: #84cc16;
+  --accent-via: #22c55e;
+  --accent-to: #10b981;
+
+  --iconwrap-from: rgba(132, 204, 22, 0.25);
+  --iconwrap-to: rgba(34, 197, 94, 0.1);
+  --icon-color: #bef264;
+
+  --title-from: #bef264;
+  --title-to: #bbf7d0;
+
+  --badge-from: rgba(54, 83, 20, 0.6);
+  --badge-to: rgba(21, 128, 61, 0.3);
+  --badge-border: rgba(163, 230, 53, 0.5);
+  --badge-border-hover: rgba(190, 242, 100, 0.7);
+
+  --rt-from: rgba(5, 150, 105, 0.4);
+  --rt-to: rgba(22, 101, 52, 0.2);
+  --rt-border: rgba(16, 185, 129, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(163, 230, 53, 0.3);
+}
+
+/* ---------- COMEDY ---------- */
+.movie-card[data-genre="comedy"] {
+  --card-border: rgba(113, 63, 18, 0.5);
+  --card-border-hover: rgba(234, 179, 8, 0.6);
+  --card-bg-from: #141204;
+  --card-bg-to: #151205;
+
+  --overlay-from: rgba(250, 204, 21, 0.1);
+  --overlay-via: rgba(245, 158, 11, 0.1);
+  --overlay-to: rgba(251, 146, 60, 0.1);
+
+  --accent-from: #facc15;
+  --accent-via: #f59e0b;
+  --accent-to: #fb923c;
+
+  --iconwrap-from: rgba(250, 204, 21, 0.25);
+  --iconwrap-to: rgba(245, 158, 11, 0.1);
+  --icon-color: #fde68a;
+
+  --title-from: #fde68a;
+  --title-to: #fcd34d;
+
+  --badge-from: rgba(113, 63, 18, 0.6);
+  --badge-to: rgba(146, 64, 14, 0.3);
+  --badge-border: rgba(234, 179, 8, 0.5);
+  --badge-border-hover: rgba(253, 224, 71, 0.7);
+
+  --rt-from: rgba(194, 65, 12, 0.4);
+  --rt-to: rgba(217, 119, 6, 0.2);
+  --rt-border: rgba(251, 146, 60, 0.5);
+
+  --card-shadow-hover: 0 20px 60px rgba(234, 179, 8, 0.3);
 }
