@@ -231,6 +231,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <div align="center">
   <i>"All we have to decide is what to do with the films that are given to us."</i>
   <br>
-  <sub>Built with ❤️ by Marcus-Kodehode</sub>
+  <sub>Built with ❤️ by Marcus</sub>
 </div>
 ```
