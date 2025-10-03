@@ -1,11 +1,14 @@
 {
   "common": {
     "cancel": "Cancel",
-    "tagline": "Explore and share your opinions about movies"
+    "tagline": "Explore and share your opinions about movies",
+    "save": "Save",
+    "edit": "Edit"
   },
   "nav": {
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "home": "Home"
   },
   "home": {
     "title": "Movie Reviews",
@@ -93,7 +96,13 @@
     "publishing": "Publishing...",
     "noReviews": "No reviews yet. Be the first to review this movie!",
     "loginToReview": "to add a review",
-    "errorGeneric": "Failed to post review"
+    "errorGeneric": "Failed to post review",
+    "sortBy": "Sort by",
+    "sortNewest": "Newest",
+    "sortBest": "Highest rated",
+    "sortWorst": "Lowest rated",
+    "sortHelpful": "Most helpful",
+    "sortControversial": "Most controversial"
   },
   "delete": {
     "confirmTitle": "Confirm deletion",

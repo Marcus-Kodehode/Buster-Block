@@ -1,8 +1,3 @@
-/*
- * File: lib/models/Review.ts
- * Location: Database model definition for Review entity
- */
-
 import mongoose, { Schema, model, models, Document } from "mongoose";
 
 export interface IReview extends Document {
@@ -11,6 +6,8 @@ export interface IReview extends Document {
   reviewAuthor: string;
   reviewText: string;
   rating: number;
+  helpfulBy: string[]; // 👈 Hvem som har likt
+  helpfulCount: number; // 👈 Teller
   createdAt: Date;
   updatedAt: Date;
 }
@@ -44,19 +41,27 @@ const ReviewSchema = new Schema<IReview>(
       min: [1, "Rating must be between 1 and 5"],
       max: [5, "Rating must be between 1 and 5"],
     },
+    helpfulBy: {
+      type: [String],
+      default: [],
+      index: true,
+    },
+    helpfulCount: {
+      type: Number,
+      default: 0,
+      index: true,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 ReviewSchema.index({ movieId: 1 });
 ReviewSchema.index({ userId: 1 });
 ReviewSchema.index({ rating: -1 });
+ReviewSchema.index({ helpfulCount: -1 });
 ReviewSchema.index({ movieId: 1, userId: 1 }, { unique: true });
 
 const Review = models.Review || model<IReview>("Review", ReviewSchema);
-
 export default Review;
 
 /*

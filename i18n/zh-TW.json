@@ -5,7 +5,8 @@
   },
   "nav": {
     "signIn": "登入",
-    "signUp": "註冊"
+    "signUp": "註冊",
+    "home": "首頁"
   },
   "home": {
     "title": "電影評論",

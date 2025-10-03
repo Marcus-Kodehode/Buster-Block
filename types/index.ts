@@ -25,6 +25,8 @@ export type Review = {
   rating: number;
   createdAt: string;
   updatedAt: string;
+  helpfulCount?: number;
+  helpfulBy?: string[];
 };
 
 export type ApiResponse<T> =

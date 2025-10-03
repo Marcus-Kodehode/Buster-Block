@@ -13,7 +13,7 @@ Språkvelger i header
 Separate translation files per språk
 URL-basert språkvalg (/no/, /en/)
 
-3. UI-forbedringer:
+3. UI-forbedringer:✅
 
 Stats på homepage (totalt filmer, gjennomsnitt rating)
 Breadcrumbs for navigasjon

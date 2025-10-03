@@ -5,7 +5,8 @@
   },
   "nav": {
     "signIn": "Giriş yap",
-    "signUp": "Kayıt ol"
+    "signUp": "Kayıt ol",
+    "home": "Ana sayfa"
   },
   "home": {
     "title": "Film İncelemeleri",

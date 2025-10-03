@@ -1,11 +1,14 @@
 {
   "common": {
     "cancel": "Avbryt",
-    "tagline": "Utforsk og del dine meninger om filmer"
+    "tagline": "Utforsk og del dine meninger om filmer",
+    "edit": "Rediger",
+    "save": "Lagre"
   },
   "nav": {
     "signIn": "Logg inn",
-    "signUp": "Registrer deg"
+    "signUp": "Registrer deg",
+    "home": "Hjem"
   },
   "home": {
     "title": "Filmanmeldelser",
@@ -93,7 +96,13 @@
     "publishing": "Publiserer...",
     "noReviews": "Ingen anmeldelser ennå. Bli den første til å anmelde denne filmen!",
     "loginToReview": "for å legge til en anmeldelse",
-    "errorGeneric": "Kunne ikke publisere anmeldelse"
+    "errorGeneric": "Kunne ikke publisere anmeldelse",
+    "sortBy": "Sorter etter",
+    "sortNewest": "Nyeste",
+    "sortBest": "Best vurdert",
+    "sortWorst": "Dårligst vurdert",
+    "sortHelpful": "Mest nyttige",
+    "sortControversial": "Mest kontroversielle"
   },
   "delete": {
     "confirmTitle": "Bekreft sletting",

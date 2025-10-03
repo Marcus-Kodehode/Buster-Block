@@ -1,4 +1,4 @@
-// ONLY the DELETE in app/api/movies/[id]/reviews/[reviewId]/route.ts
+// app/api/movies/[id]/reviews/[reviewId]/helpful/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/mongodb";
@@ -7,7 +7,7 @@ import Review from "@/lib/models/Review";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function DELETE(
+export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string; reviewId: string }> }
 ) {
@@ -23,6 +23,7 @@ export async function DELETE(
 
   try {
     await connectDB();
+
     const review = await Review.findById(reviewId);
     if (!review) {
       return NextResponse.json(
@@ -31,37 +32,35 @@ export async function DELETE(
       );
     }
 
-    if (review.userId !== userId) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Forbidden: You can only delete your own reviews",
-        },
-        { status: 403 }
-      );
+    // defaults for legacy docs
+    if (!Array.isArray(review.helpfulBy)) review.helpfulBy = [];
+    if (typeof review.helpfulCount !== "number") review.helpfulCount = 0;
+
+    const idx = review.helpfulBy.indexOf(userId);
+    if (idx >= 0) {
+      // un-like
+      review.helpfulBy.splice(idx, 1);
+      review.helpfulCount = Math.max(0, review.helpfulCount - 1);
+    } else {
+      review.helpfulBy.push(userId);
+      review.helpfulCount += 1;
     }
 
-    await Review.findByIdAndDelete(reviewId);
+    await review.save();
+
     return NextResponse.json({
       success: true,
-      message: "Review deleted successfully",
+      data: {
+        helpfulCount: review.helpfulCount,
+        helpfulBy: review.helpfulBy,
+        liked: idx < 0,
+      },
     });
-  } catch (err) {
-    console.error("Error deleting review:", err);
+  } catch (error) {
+    console.error("Error toggling helpful:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to delete review" },
+      { success: false, error: "Failed to toggle helpful" },
       { status: 500 }
     );
   }
 }
-
-/*
- * This API route handles individual review operations:
- * - DELETE: Remove a specific review
- * Features:
- * - Authentication verification
- * - Owner-only access control
- * - Review existence validation
- * - Clean error handling
- * - Proper status codes (200, 401, 403, 404, 500)
- */

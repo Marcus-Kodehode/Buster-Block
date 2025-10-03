@@ -83,6 +83,14 @@ export default async function MoviePage({
       rating: review.rating,
       createdAt: review.createdAt.toISOString(),
       updatedAt: review.updatedAt.toISOString(),
+
+      helpfulBy: Array.isArray(review.helpfulBy) ? review.helpfulBy : [],
+      helpfulCount:
+        typeof review.helpfulCount === "number"
+          ? review.helpfulCount
+          : Array.isArray(review.helpfulBy)
+          ? review.helpfulBy.length
+          : 0,
     }));
   } catch (error) {
     console.error("Error fetching movie data:", error);
