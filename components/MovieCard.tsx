@@ -5,11 +5,13 @@
 
 import Link from "next/link";
 import { Movie } from "@/types";
-import { Film, Clock } from "lucide-react";
-import { useT } from "@/components/I18nProvider"; // 👈
+import type { ReviewStats } from "@/types";
+import { Film, Clock, Star, MessageSquare } from "lucide-react";
+import { useT } from "@/components/I18nProvider";
 
 interface MovieCardProps {
   movie: Movie;
+  stats?: ReviewStats;
 }
 
 function genreSlug(genre?: string) {
@@ -17,8 +19,8 @@ function genreSlug(genre?: string) {
   return genre.trim().toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function MovieCard({ movie }: MovieCardProps) {
-  const t = useT(); // 👈
+export default function MovieCard({ movie, stats }: MovieCardProps) {
+  const t = useT();
   const slug = genreSlug(movie.genre);
 
   return (
@@ -27,11 +29,9 @@ export default function MovieCard({ movie }: MovieCardProps) {
         className="movie-card group relative rounded-2xl p-6 overflow-hidden backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl min-h-[280px] flex flex-col"
         data-genre={slug}
       >
-        {/* Overlays */}
         <div className="overlay absolute inset-0 rounded-2xl pointer-events-none" />
         <div className="accent-line absolute top-0 left-0 right-0 h-1" />
 
-        {/* Content */}
         <div className="content flex-1 flex flex-col">
           <div className="flex items-start gap-3 mb-4">
             <div className="icon-wrap p-2.5 rounded-xl transition-all duration-300 flex-shrink-0">
@@ -73,6 +73,19 @@ export default function MovieCard({ movie }: MovieCardProps) {
                 {movie.runtime}
                 {t("movie.minutes")}
               </span>
+            )}
+
+            {stats && (
+              <>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap bg-gray-800/60 border border-gray-700">
+                  <MessageSquare className="w-3 h-3" />
+                  {stats.reviewCount}
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap bg-gray-800/60 border border-gray-700">
+                  <Star className="w-3 h-3 text-yellow-500" />
+                  {stats.avgRating ?? "–"}
+                </span>
+              </>
             )}
           </div>
         </div>

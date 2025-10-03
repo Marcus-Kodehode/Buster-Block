@@ -9,6 +9,7 @@ import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
 import EditMovieForm from "@/components/EditMovieForm";
 import type { Movie as MovieType } from "@/types";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 import { cookies } from "next/headers";
 import {
@@ -66,6 +67,14 @@ export default async function EditMoviePage({
 
   return (
     <div className="max-w-2xl mx-auto">
+      <Breadcrumbs
+        items={[
+          { href: "/", label: t("nav.home") },
+          { href: "/", label: t("home.title") },
+          { href: `/movies/${id}`, label: movie!.title },
+          { label: t("movie.edit") },
+        ]}
+      />
       <div className="mb-8">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-white via-[#06b6d4] to-[#ec4899] bg-clip-text text-transparent mb-2">
           {t("movieForm.editTitle")}

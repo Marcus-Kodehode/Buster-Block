@@ -37,6 +37,18 @@ export type ApiResponse<T> =
       error: string;
     };
 
+export type ReviewStats = {
+  movieId: string;
+  reviewCount: number;
+  avgRating: number | null;
+};
+
+export type OverallStats = {
+  totalMovies: number;
+  totalReviews: number;
+  avgRating: number | null;
+};
+
 /*
  * This file defines the core type definitions used throughout the application:
  * - Movie type with all its properties

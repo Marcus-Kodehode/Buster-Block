@@ -13,6 +13,7 @@ import connectDB from "@/lib/mongodb";
 import Movie from "@/lib/models/Movie";
 import Review from "@/lib/models/Review";
 import type { Movie as MovieType, Review as ReviewType } from "@/types";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import {
   Clock,
   Calendar,
@@ -92,6 +93,14 @@ export default async function MoviePage({
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      <Breadcrumbs
+        items={[
+          { href: "/", label: t("nav.home") }, // legg til "nav.home" = "Home" i i18n
+          { href: "/", label: t("home.title") }, // "Movie Reviews" / "Filmanmeldelser"
+          { label: movie!.title },
+        ]}
+      />
+
       <Link
         href="/"
         className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6c47ff] to-[#06b6d4] bg-clip-text text-transparent hover:from-[#06b6d4] hover:to-[#ec4899] transition-all group font-semibold"

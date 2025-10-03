@@ -11,20 +11,27 @@ import Image from "next/image";
 import MovieCard from "@/components/MovieCard";
 import MovieFilters, { FilterState } from "@/components/MovieFilters";
 import type { Movie } from "@/types";
-import { Film, Sparkles } from "lucide-react";
+import type { ReviewStats, OverallStats } from "@/types";
+import { Film, Sparkles, Star, MessageSquare } from "lucide-react";
 
-// 👇 importer fra i18n-contexten din
+// i18n
 import { useI18n, useT } from "@/components/I18nProvider";
-
 
 interface HomeClientProps {
   movies: Movie[];
   userId: string | null;
+  perMovie?: ReviewStats[];
+  overall?: OverallStats;
 }
 
-export default function HomeClient({ movies, userId }: HomeClientProps) {
-  const { locale } = useI18n();   // <- henter gjeldende språk
-  const t = useT();               // <- oversetter-funksjon
+export default function HomeClient({
+  movies,
+  userId,
+  perMovie = [],
+  overall,
+}: HomeClientProps) {
+  const { locale } = useI18n();
+  const t = useT();
 
   const [filters, setFilters] = useState<FilterState>({
     search: "",
@@ -91,6 +98,13 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
     return result;
   }, [movies, filters, locale]);
 
+  // Map med pr-film stats for rask tilgang i MovieCard
+  const statsMap = useMemo(() => {
+    const m = new Map<string, ReviewStats>();
+    perMovie.forEach((s) => m.set(s.movieId, s));
+    return m;
+  }, [perMovie]);
+
   return (
     <div className="space-y-10">
       <div className="flex items-center justify-between">
@@ -116,6 +130,38 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
             </span>
           </Link>
         )}
+      </div>
+
+      {/* Stats-panel */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="border border-gray-800 rounded-xl p-4 bg-gray-900/40">
+          <div className="text-sm text-gray-500">{t("home.title")}</div>
+          <div className="text-2xl font-bold mt-1">
+            {overall?.totalMovies ?? movies.length}
+          </div>
+          <div className="text-xs text-gray-500 mt-1">
+            {t("home.showing", { count: movies.length, total: movies.length })}
+          </div>
+        </div>
+        <div className="border border-gray-800 rounded-xl p-4 bg-gray-900/40">
+          <div className="text-sm text-gray-500 flex items-center gap-2">
+            <MessageSquare className="w-4 h-4 text-[#06b6d4]" />{" "}
+            {t("reviews.title")}
+          </div>
+          <div className="text-2xl font-bold mt-1">
+            {overall?.totalReviews ?? 0}
+          </div>
+          <div className="text-xs text-gray-500 mt-1"> </div>
+        </div>
+        <div className="border border-gray-800 rounded-xl p-4 bg-gray-900/40">
+          <div className="text-sm text-gray-500 flex items-center gap-2">
+            <Star className="w-4 h-4 text-yellow-500" /> Avg
+          </div>
+          <div className="text-2xl font-bold mt-1">
+            {overall?.avgRating ?? "–"}
+          </div>
+          <div className="text-xs text-gray-500 mt-1">/ 5</div>
+        </div>
       </div>
 
       {movies.length === 0 ? (
@@ -162,7 +208,11 @@ export default function HomeClient({ movies, userId }: HomeClientProps) {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredMovies.map((movie) => (
-                  <MovieCard key={movie._id} movie={movie} />
+                  <MovieCard
+                    key={movie._id}
+                    movie={movie}
+                    stats={statsMap.get(movie._id) || undefined}
+                  />
                 ))}
               </div>
             </div>
