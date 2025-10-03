@@ -21,7 +21,7 @@ Toast notifications for suksess/feil
 Loading skeletons i stedet for blank skjerm
 
 Middels prioritet:
-4. Review-forbedringer:
+4. Review-forbedringer:✅
 
 Mulighet til å editere/slette egne reviews
 Like/helpful knapp på reviews

@@ -14,10 +14,13 @@ import {
   FileText,
   Clock,
 } from "lucide-react";
-import { useT } from "@/components/I18nProvider"; // 👈
+import { useT } from "@/components/I18nProvider";
+
+// Felles sjanger-liste (samme som i EditMovieForm)
+import { GENRES, isGenre, type Genre } from "@/lib/genres";
 
 export default function MovieForm() {
-  const t = useT(); // 👈
+  const t = useT();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -26,7 +29,8 @@ export default function MovieForm() {
     title: "",
     director: "",
     releaseYear: new Date().getFullYear(),
-    genre: "",
+    // start med en gyldig sjanger så kort-stil alltid blir riktig
+    genre: GENRES[0],
     description: "",
     runtime: undefined,
   });
@@ -46,7 +50,7 @@ export default function MovieForm() {
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || t("movieForm.errorGeneric")); // 👈 fallback i18n
+        throw new Error(data.error || t("movieForm.errorGeneric"));
       }
 
       router.push(`/movies/${data.data._id}`);
@@ -69,6 +73,7 @@ export default function MovieForm() {
         </div>
       )}
 
+      {/* Title */}
       <div className="space-y-2">
         <label
           htmlFor="title"
@@ -89,6 +94,7 @@ export default function MovieForm() {
         />
       </div>
 
+      {/* Director */}
       <div className="space-y-2">
         <label
           htmlFor="director"
@@ -111,6 +117,7 @@ export default function MovieForm() {
         />
       </div>
 
+      {/* Year + Runtime */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label
@@ -150,7 +157,7 @@ export default function MovieForm() {
             id="runtime"
             min={1}
             max={1000}
-            value={formData.runtime || ""}
+            value={formData.runtime ?? ""}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -163,6 +170,7 @@ export default function MovieForm() {
         </div>
       </div>
 
+      {/* Genre dropdown */}
       <div className="space-y-2">
         <label
           htmlFor="genre"
@@ -171,18 +179,40 @@ export default function MovieForm() {
           <Tag className="w-4 h-4 text-[#6c47ff]" />
           {t("movieForm.genreLabel")} *
         </label>
-        <input
-          type="text"
-          id="genre"
-          required
-          maxLength={50}
-          value={formData.genre}
-          onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent placeholder:text-gray-600 hover:border-gray-700"
-          placeholder={t("movieForm.genrePlaceholder")}
-        />
+
+        <div className="relative">
+          <select
+            id="genre"
+            required
+            value={formData.genre}
+            onChange={(e) =>
+              setFormData({ ...formData, genre: e.target.value })
+            }
+            className="w-full appearance-none pr-10 px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent transition-all text-gray-300 cursor-pointer hover:border-gray-700"
+          >
+            {GENRES.map((g) => (
+              <option key={g} value={g} className="bg-[#0a0a0a] text-gray-300">
+                {g}
+              </option>
+            ))}
+          </select>
+
+          <svg
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
 
+      {/* Description */}
       <div className="space-y-2">
         <label
           htmlFor="description"
@@ -207,6 +237,7 @@ export default function MovieForm() {
         </p>
       </div>
 
+      {/* Actions */}
       <div className="flex gap-4 pt-4">
         <button
           type="submit"

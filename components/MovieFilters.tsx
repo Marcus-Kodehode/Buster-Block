@@ -105,32 +105,41 @@ export default function MovieFilters({
             <label className="text-sm font-semibold text-gray-300">
               {t("filters.genre")}
             </label>
-            <select
-              value={filters.genre}
-              onChange={(e) => updateFilters({ genre: e.target.value })}
-              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right 0.75rem center",
-                backgroundSize: "1.5em 1.5em",
-                paddingRight: "2.5rem",
-              }}
-            >
-              <option value="" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.allGenres")}
-              </option>
-              {availableGenres.map((genre) => (
-                <option
-                  key={genre}
-                  value={genre}
-                  className="bg-[#0a0a0a] text-gray-300"
-                >
-                  {genre}
+
+            <div className="relative">
+              <select
+                value={filters.genre}
+                onChange={(e) => updateFilters({ genre: e.target.value })}
+                className="w-full appearance-none pr-10 px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
+              >
+                <option value="" className="bg-[#0a0a0a] text-gray-300">
+                  {t("filters.allGenres")}
                 </option>
-              ))}
-            </select>
+                {availableGenres.map((genre) => (
+                  <option
+                    key={genre}
+                    value={genre}
+                    className="bg-[#0a0a0a] text-gray-300"
+                  >
+                    {genre}
+                  </option>
+                ))}
+              </select>
+
+              {/* vår chevron */}
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
 
           {/* Sort */}
@@ -138,42 +147,59 @@ export default function MovieFilters({
             <label className="text-sm font-semibold text-gray-300">
               {t("filters.sortBy")}
             </label>
-            <select
-              value={filters.sortBy}
-              onChange={(e) =>
-                updateFilters({
-                  sortBy: e.target.value as FilterState["sortBy"],
-                })
-              }
-              className="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right 0.75rem center",
-                backgroundSize: "1.5em 1.5em",
-                paddingRight: "2.5rem",
-              }}
-            >
-              <option value="year-desc" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.yearNewest")}
-              </option>
-              <option value="year-asc" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.yearOldest")}
-              </option>
-              <option value="title-asc" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.titleAsc")}
-              </option>
-              <option value="title-desc" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.titleDesc")}
-              </option>
-              <option value="newest" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.addedLast")}
-              </option>
-              <option value="oldest" className="bg-[#0a0a0a] text-gray-300">
-                {t("filters.addedFirst")}
-              </option>
-            </select>
+
+            <div className="relative">
+              <select
+                value={filters.sortBy}
+                onChange={(e) =>
+                  updateFilters({
+                    sortBy: e.target.value as FilterState["sortBy"],
+                  })
+                }
+                className="w-full appearance-none pr-10 px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-xl focus:ring-2 focus:ring-[#6c47ff] focus:border-transparent text-gray-300 cursor-pointer hover:border-gray-700"
+              >
+                <option
+                  value="year-desc"
+                  className="bg-[#0a0a0a] text-gray-300"
+                >
+                  {t("filters.yearNewest")}
+                </option>
+                <option value="year-asc" className="bg-[#0a0a0a] text-gray-300">
+                  {t("filters.yearOldest")}
+                </option>
+                <option
+                  value="title-asc"
+                  className="bg-[#0a0a0a] text-gray-300"
+                >
+                  {t("filters.titleAsc")}
+                </option>
+                <option
+                  value="title-desc"
+                  className="bg-[#0a0a0a] text-gray-300"
+                >
+                  {t("filters.titleDesc")}
+                </option>
+                <option value="newest" className="bg-[#0a0a0a] text-gray-300">
+                  {t("filters.addedLast")}
+                </option>
+                <option value="oldest" className="bg-[#0a0a0a] text-gray-300">
+                  {t("filters.addedFirst")}
+                </option>
+              </select>
+
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
 
           {/* Year range */}
