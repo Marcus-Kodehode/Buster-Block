@@ -1,14 +1,10 @@
-/*
- * File: app/(auth)/sign-in/[[...sign-in]]/page.tsx
- * Location: Authentication page for user sign-in
- */
-
-import { SignIn } from "@clerk/nextjs";
+// app/(auth)/sign-in/[[...sign-in]]/page.tsx
+import ClientSignIn from "@/components/auth/ClientSignIn";
 
 export default function SignInPage() {
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
-      <SignIn />
+      <ClientSignIn />
     </div>
   );
 }

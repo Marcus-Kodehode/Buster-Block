@@ -1,14 +1,10 @@
-/*
- * File: app/(auth)/sign-up/[[...sign-up]]/page.tsx
- * Location: Authentication page for user registration
- */
-
-import { SignUp } from "@clerk/nextjs";
+// app/(auth)/sign-up/[[...sign-up]]/page.tsx
+import ClientSignUp from "@/components/auth/ClientSignUp";
 
 export default function SignUpPage() {
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
-      <SignUp />
+      <ClientSignUp />
     </div>
   );
 }

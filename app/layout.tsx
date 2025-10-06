@@ -14,6 +14,8 @@ import I18nProvider from "@/components/I18nProvider";
 import LanguageToggle from "@/components/LanguageToggle";
 import ToastProvider from "@/components/ToastProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { clerkLocalizationFor } from "@/lib/clerkLocale";
+import AuthButtons from "@/components/AuthButtons";
 import {
   normalizeLocale,
   defaultLocale,
@@ -38,9 +40,11 @@ export default async function RootLayout({
   const raw = cookieStore.get("lang")?.value;
   const locale: Locale = normalizeLocale(raw) ?? defaultLocale;
   const messages = await loadMessages(locale);
+  // 👇 Clerk-lokaliseringspakke
+  const clerkLoc = clerkLocalizationFor(locale);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={clerkLoc}>
       <Analytics />
       <html lang={locale}>
         <body className={inter.className}>
@@ -64,23 +68,7 @@ export default async function RootLayout({
 
                   <div className="flex items-center gap-4">
                     <LanguageToggle initialLocale={locale} />
-                    <SignedOut>
-                      <Link
-                        href="/sign-in"
-                        className="text-sm font-medium text-gray-400 hover:text-[#fbbf24]"
-                      >
-                        Logg inn
-                      </Link>
-                      <Link
-                        href="/sign-up"
-                        className="bg-gradient-to-r from-[#1e40af] to-[#1e3a8a] text-white rounded-lg px-4 py-2 text-sm font-medium hover:shadow-lg hover:shadow-[#1e40af]/50 transition-all hover:-translate-y-0.5"
-                      >
-                        Registrer deg
-                      </Link>
-                    </SignedOut>
-                    <SignedIn>
-                      <UserButton afterSignOutUrl="/" />
-                    </SignedIn>
+                    <AuthButtons />
                   </div>
                 </nav>
               </header>
