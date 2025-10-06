@@ -20,7 +20,9 @@ buster-block/
 ├── i18n/                  # Internationalization files
 ├── lib/                   # Core utilities and models
 ├── public/               # Static assets
-└── types/                # TypeScript type definitions
+├── types/                # TypeScript type definitions
+├── .github/              # GitHub specific files
+└── docs/                 # Project documentation
 ```
 
 ## Detailed Breakdown
@@ -93,10 +95,16 @@ Static assets served by Next.js.
 
 ```
 public/
-├── icons/                 # Icon assets
+├── icons/                # Icon assets
+│   ├── en.png           # English language icon
+│   ├── mx.png           # Mexican language icon
+│   ├── no.png           # Norwegian language icon
+│   ├── tr.png           # Turkish language icon
+│   ├── tw.png           # Traditional Chinese language icon
+│   └── tz.png           # Swahili language icon
 └── images/
-    ├── logo.png          # Site logo
-    └── MBlogo.png        # Movie database logo
+    ├── logo.png         # Site logo
+    └── MBlogo.png       # Personal logo
 ```
 
 ### `/types` Directory
@@ -113,7 +121,11 @@ Internationalization and translation files.
 ```
 i18n/
 ├── en.json              # English translations
-└── nb.json              # Norwegian (Bokmål) translations
+├── es-MX.json          # Spanish (Mexico) translations
+├── no.json             # Norwegian translations
+├── sw.json             # Swahili translations
+├── tr.json             # Turkish translations
+└── zh-TW.json          # Traditional Chinese translations
 ```
 
 ### Configuration Files
@@ -127,6 +139,17 @@ Root level configuration files for various tools and frameworks.
 └── middleware.ts         # Next.js middleware configuration
 ```
 
+### `/.github` Directory
+GitHub specific configuration and templates.
+
+```
+.github/
+├── ISSUE_TEMPLATE/
+│   ├── bug_report.md     # Bug report template
+│   └── feature_request.md # Feature request template
+└── pull_request_template.md # PR template
+```
+
 ## Root Configuration Files
 
 - `middleware.ts` - Clerk authentication middleware
@@ -135,3 +158,10 @@ Root level configuration files for various tools and frameworks.
 - `package.json` - Project dependencies and scripts
 - `eslint.config.mjs` - ESLint configuration
 - `postcss.config.mjs` - PostCSS configuration
+- `CODE_OF_CONDUCT.md` - Project code of conduct
+- `CONTRIBUTING.md` - Contribution guidelines
+- `DESCRIPTION.md` - Detailed project description
+- `LICENSE` - Project license
+- `README.md` - Project overview and setup
+- `SECURITY.md` - Security policy and guidelines
+- `Buster-Block-API.postman_collection.json` - Postman API collection
