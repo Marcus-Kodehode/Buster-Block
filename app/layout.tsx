@@ -13,6 +13,7 @@ import { cookies } from "next/headers";
 import I18nProvider from "@/components/I18nProvider";
 import LanguageToggle from "@/components/LanguageToggle";
 import ToastProvider from "@/components/ToastProvider";
+import { Analytics } from "@vercel/analytics/next";
 import {
   normalizeLocale,
   defaultLocale,
@@ -40,6 +41,7 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider>
+      <Analytics />
       <html lang={locale}>
         <body className={inter.className}>
           <I18nProvider locale={locale} messages={messages}>
