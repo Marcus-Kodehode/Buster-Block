@@ -10,7 +10,7 @@
   
   > A full-stack movie review platform where film enthusiasts share their passion – Rate, review, and discover cinema!
   
-  [![Next.js](https://img.shields.io/badge/Next.js-14-000000.svg)](https://nextjs.org)
+  [![Next.js](https://img.shields.io/badge/Next.js-15-000000.svg)](https://nextjs.org)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6.svg)](https://www.typescriptlang.org)
   [![MongoDB](https://img.shields.io/badge/MongoDB-7-47a248.svg)](https://www.mongodb.com)
   [![Clerk](https://img.shields.io/badge/Clerk-Auth-6c47ff.svg)](https://clerk.com)
